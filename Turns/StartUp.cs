@@ -20,7 +20,7 @@ namespace Turns
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
-      services.AddDbContext<TurnsContext>(options => options.UseSqlServer());
+      services.AddDbContext<TurnsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TurnsContext")));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
