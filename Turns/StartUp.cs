@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Turns.Models;
 
-namespace turns
+namespace Turns
 {
-  public class StartUp
+    public class StartUp
   {
     public StartUp(IConfiguration configuration)
     {
@@ -19,6 +20,7 @@ namespace turns
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      services.AddDbContext<TurnsContext>(options => options.UseSqlServer());
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
