@@ -9,8 +9,8 @@ using Turns.Models;
 namespace Turns.Migrations
 {
     [DbContext(typeof(TurnsContext))]
-    [Migration("20220720154102_Migration")]
-    partial class Migration
+    [Migration("20220720160306_Migracion")]
+    partial class Migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
