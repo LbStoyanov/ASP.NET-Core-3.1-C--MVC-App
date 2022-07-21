@@ -6,15 +6,15 @@ namespace Turns.Controllers
 {
     public class EspecialidadController : Controller
     {
-        private readonly TurnsContext context;
+        private readonly TurnsContext _context;
        public EspecialidadController(TurnsContext context)
        {
-            this.context = context;
+            _context = context;
        }
 
         public IActionResult Index()
         {
-            return View(this.context.Speciality.ToList());
+            return View(_context.Speciality.ToList());
         }
     }
 }
