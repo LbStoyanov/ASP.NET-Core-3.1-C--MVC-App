@@ -1,7 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Turns.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<TurnsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TurnsContext")));
 
 var app = builder.Build();
 
