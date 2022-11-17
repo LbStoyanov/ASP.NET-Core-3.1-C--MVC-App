@@ -4,7 +4,7 @@
 
 namespace Turns.Migrations
 {
-    public partial class Migration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
