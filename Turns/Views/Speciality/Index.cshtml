@@ -1,33 +1,23 @@
 @model IEnumerable<Turns.Models.Speciality>
 
-<!DOCTYPE html>
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @*Here we put the code to show the registers from DB*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
 
-<html>
-    <head>
-        <title>Specialities</title>
-    </head>
-
-    <body>
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @*Here we put the code to show the registers from DB*@
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                    </tr>
-                }
-                
-            </tbody>
-        </table>
-    </body>
-</html>
+    </tbody>
+</table>

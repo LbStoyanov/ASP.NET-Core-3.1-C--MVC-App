@@ -16,5 +16,12 @@ namespace Turns.Controllers
         {
             return View(this._context.Specialities.ToList());
         }
+
+        public IActionResult Edit(int id)
+        {   
+            var speciality = this._context.Specialities.Find(id);
+
+            return View(speciality);
+        }
     }
 }
