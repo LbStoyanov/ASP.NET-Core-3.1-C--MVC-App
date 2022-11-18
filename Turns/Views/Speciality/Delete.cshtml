@@ -1,0 +1,22 @@
+@model Turns.Models.Speciality
+
+<h3>Are you sure about delete action?</h3>
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SpecialityId"/>
+        <input type="submit" value="Delete">
+    </form>
+
+    <div>
+        <a asp-action="Index">Back</a>
+    </div>
+</div>

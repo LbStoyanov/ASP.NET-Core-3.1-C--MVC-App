@@ -18,11 +18,11 @@ namespace Turns.Controllers
         }
 
         public IActionResult Edit(int? id)
-        {   
+        {
 
             if (id == null)
             {
-                return NotFound();             
+                return NotFound();
             }
 
             var speciality = this._context.Specialities.Find(id);
@@ -36,7 +36,7 @@ namespace Turns.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, [Bind("SpecialtyId,Description")] Speciality speciality)
+        public IActionResult Edit(int id, [Bind("SpecialityId,Description")] Speciality speciality)
         {
             if (id != speciality.SpecialityId)
             {
@@ -51,5 +51,37 @@ namespace Turns.Controllers
             }
             return View(speciality);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var speciality = this._context.Specialities.FirstOrDefault(x => x.SpecialityId == id);
+
+            if (speciality == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(speciality);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var speciality = this._context.Specialities.Find(id);
+
+            this._context.Specialities.Remove(speciality!);
+            this._context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
     }
 }
