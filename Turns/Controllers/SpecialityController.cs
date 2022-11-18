@@ -36,9 +36,9 @@ namespace Turns.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, [Bind("IdSpeciality,Description")] Speciality speciality)
+        public IActionResult Edit(int id, [Bind("SpecialtyId,Description")] Speciality speciality)
         {
-            if (id != speciality.SpecialtyId)
+            if (id != speciality.SpecialityId)
             {
                 return NotFound();
             }
