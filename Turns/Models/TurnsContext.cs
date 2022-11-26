@@ -12,6 +12,8 @@ namespace Turns.Models
 
         public DbSet<Speciality> Specialities{ get; set;}
 
+        public DbSet<Patient> Patients {get; set;}
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +28,41 @@ namespace Turns.Models
                 .HasMaxLength(200)
                 .IsUnicode(false);
             });
+
+            modelBuilder.Entity<Patient>(entity =>
+            {
+                entity.ToTable("Patients");
+
+                entity.HasKey(p => p.PatientId);
+
+                entity.Property(p => p.FirstName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+
+                entity.Property(p => p.LastName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(p => p.Direction)
+                .IsRequired()
+                .HasMaxLength(250)
+                .IsUnicode(false);
+
+                entity.Property(p => p.PhoneNumber)
+                .IsRequired()
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+                entity.Property(p => p.Email)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            });
+
+            
         }
     }
 }
