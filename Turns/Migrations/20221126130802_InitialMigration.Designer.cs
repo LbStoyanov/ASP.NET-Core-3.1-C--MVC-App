@@ -11,7 +11,7 @@ using Turns.Models;
 namespace Turns.Migrations
 {
     [DbContext(typeof(TurnsContext))]
-    [Migration("20221126130215_InitialMigration")]
+    [Migration("20221126130802_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,7 +63,7 @@ namespace Turns.Migrations
 
                     b.HasKey("PatientId");
 
-                    b.ToTable("Patient", (string)null);
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("Turns.Models.Speciality", b =>
@@ -82,7 +82,7 @@ namespace Turns.Migrations
 
                     b.HasKey("SpecialityId");
 
-                    b.ToTable("Speciality", (string)null);
+                    b.ToTable("Specialities", (string)null);
                 });
 #pragma warning restore 612, 618
         }

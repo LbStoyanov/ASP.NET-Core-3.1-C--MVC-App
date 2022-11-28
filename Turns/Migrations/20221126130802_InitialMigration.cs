@@ -9,7 +9,7 @@ namespace Turns.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Patient",
+                name: "Patients",
                 columns: table => new
                 {
                     PatientId = table.Column<int>(type: "int", nullable: false)
@@ -22,11 +22,11 @@ namespace Turns.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Patient", x => x.PatientId);
+                    table.PrimaryKey("PK_Patients", x => x.PatientId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Speciality",
+                name: "Specialities",
                 columns: table => new
                 {
                     SpecialityId = table.Column<int>(type: "int", nullable: false)
@@ -35,17 +35,17 @@ namespace Turns.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Speciality", x => x.SpecialityId);
+                    table.PrimaryKey("PK_Specialities", x => x.SpecialityId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Patient");
+                name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "Speciality");
+                name: "Specialities");
         }
     }
 }

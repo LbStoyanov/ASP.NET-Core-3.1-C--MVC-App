@@ -61,7 +61,7 @@ namespace Turns.Migrations
 
                     b.HasKey("PatientId");
 
-                    b.ToTable("Patient", (string)null);
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("Turns.Models.Speciality", b =>
@@ -80,7 +80,7 @@ namespace Turns.Migrations
 
                     b.HasKey("SpecialityId");
 
-                    b.ToTable("Speciality", (string)null);
+                    b.ToTable("Specialities", (string)null);
                 });
 #pragma warning restore 612, 618
         }

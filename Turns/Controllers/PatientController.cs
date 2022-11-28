@@ -16,6 +16,42 @@ namespace Turns.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await this._context.Patients.ToListAsync());
+        } 
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var patient = await this._context.Patients.FirstOrDefaultAsync(p=>p.PatientId == id);
+
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            return View(patient);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("PatientId")] Patient patient)
+        {
+            if (ModelState.IsValid)
+            {
+                this._context.Add(patient);
+                await this._context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View();
+        }
+
     }
 }
