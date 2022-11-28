@@ -41,7 +41,8 @@ namespace Turns.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("PatientId")] Patient patient)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("PatientId,FirstName,LastName,Direction,PhoneNumber,Email")] Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +51,7 @@ namespace Turns.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View();
+            return View(patient);
         }
 
     }
