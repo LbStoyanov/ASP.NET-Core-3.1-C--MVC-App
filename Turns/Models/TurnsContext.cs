@@ -19,7 +19,7 @@ namespace Turns.Models
         {
             modelBuilder.Entity<Speciality>(entity => 
             {
-                entity.ToTable("Speciality");
+                entity.ToTable("Specialities");
 
                 entity.HasKey(e => e.SpecialityId);
 
@@ -61,7 +61,6 @@ namespace Turns.Models
                 .HasMaxLength(100)
                 .IsUnicode(false);
             });
-
             
         }
     }
