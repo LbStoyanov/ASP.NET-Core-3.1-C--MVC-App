@@ -97,7 +97,7 @@ namespace Turns.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View();
+            return View(speciality);
         }
 
         
