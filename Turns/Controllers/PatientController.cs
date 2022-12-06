@@ -97,7 +97,7 @@ namespace Turns.Controllers
                 return NotFound();
             }
 
-            var patient = this._context.Patients.FirstOrDefaultAsync(x => x.PatientId == id);
+            var patient = await this._context.Patients.FirstOrDefaultAsync(x => x.PatientId == id);
 
             if (patient == null)
             {
