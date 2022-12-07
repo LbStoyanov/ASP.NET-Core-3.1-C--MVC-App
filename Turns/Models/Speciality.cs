@@ -7,6 +7,6 @@ namespace Turns.Models
         [Key]
         public int SpecialityId { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
     }
 }

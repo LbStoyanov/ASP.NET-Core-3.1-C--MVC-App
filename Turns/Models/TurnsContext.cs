@@ -4,15 +4,14 @@ namespace Turns.Models
 {
     public class TurnsContext : DbContext
     {
-        public TurnsContext(DbContextOptions<TurnsContext> options)
-        :base(options)
+        public TurnsContext(DbContextOptions<TurnsContext> options) 
         {
             
         }
 
-        public DbSet<Speciality> Specialities{ get; set;}
+        public DbSet<Speciality> Specialities{ get; set;} = null!;
 
-        public DbSet<Patient> Patients {get; set;}
+        public DbSet<Patient> Patients {get; set;} = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
