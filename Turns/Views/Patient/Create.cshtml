@@ -1,0 +1,40 @@
+@model Turns.Models.Patient
+
+<h4>Patient</h4>
+
+<div>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName"/>
+            <span asp-validation-for="FirstName"></span>
+        </div>
+         <div>
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName"/>
+            <span asp-validation-for="LastName"></span>
+        </div>
+         <div>
+            <label asp-for="Direction"></label>
+            <input asp-for="Direction"/>
+            <span asp-validation-for="Direction"></span>
+        </div>
+          <div>
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber"/>
+            <span asp-validation-for="PhoneNumber"></span>
+        </div>
+          <div>
+            <label asp-for="Email"></label>
+            <input asp-for="Email"/>
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <input type="submit" value="Save"/>
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back</a>
+</div>
