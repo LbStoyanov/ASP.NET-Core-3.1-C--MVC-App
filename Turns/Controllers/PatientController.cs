@@ -84,7 +84,7 @@ namespace Turns.Controllers
             {
                 this._context.Update(patient);
                 await this._context.SaveChangesAsync();
-                RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
 
             return View(patient);
