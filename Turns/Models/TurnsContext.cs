@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Turns.Models;
 
 namespace Turns.Models
 {
@@ -15,7 +14,7 @@ namespace Turns.Models
 
         public DbSet<Patient> Patients {get; set;} = null!;
 
-        public DbSet<Turns.Models.Doctor> Doctors { get; set; } = null!;
+        public DbSet<Doctor> Doctors { get; set; } = null!;
 
         
 
@@ -64,6 +63,45 @@ namespace Turns.Models
                 entity.Property(p => p.Email)
                 .IsRequired()
                 .HasMaxLength(100)
+                .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Doctor>(entity => {
+                entity.ToTable("Doctors");
+
+                entity.HasKey(d => d.DoctorId);
+
+                entity.Property(d => d.FirstName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(d => d.LastName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(d => d.Address)
+                .IsRequired()
+                .HasMaxLength(250)
+                .IsUnicode(false);
+
+                entity.Property(d => d.PhoneNumber)
+                .IsRequired()
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+                entity.Property(d => d.Email)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(d => d.WorkingHoursFrom)
+                .IsRequired()
+                .IsUnicode(false);
+
+                entity.Property(d => d.WorkingHoursTo)
+                .IsRequired()
                 .IsUnicode(false);
             });
             
