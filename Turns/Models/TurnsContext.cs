@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Turns.Models;
 
 namespace Turns.Models
 {
@@ -13,6 +14,10 @@ namespace Turns.Models
         public DbSet<Speciality> Specialities{ get; set;} = null!;
 
         public DbSet<Patient> Patients {get; set;} = null!;
+
+        public DbSet<Turns.Models.Doctor> Doctors { get; set; } = null!;
+
+        
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,5 +68,13 @@ namespace Turns.Models
             });
             
         }
+
+        
+
+
+        
+
+
+        
     }
 }
