@@ -134,7 +134,7 @@ namespace Turns.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var doctor = await _context.Doctors.FindAsync(id);
-            _context.Doctors.Remove(doctor);
+            _context.Doctors.Remove(doctor!);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
