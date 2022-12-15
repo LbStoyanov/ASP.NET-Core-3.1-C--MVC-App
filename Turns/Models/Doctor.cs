@@ -4,6 +4,8 @@ namespace Turns.Models
 {
     public class Doctor
     {
+     
+
         [Key]
         public int DoctorId { get; set; }
 
@@ -15,5 +17,7 @@ namespace Turns.Models
 
         public DateTime WorkingHoursFrom { get; set; }
         public DateTime WorkingHoursTo { get; set; }
+
+        public  List<DoctorSpeciality> DoctorSpecialities {get; set;} = null!;
     }
 }
