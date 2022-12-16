@@ -18,6 +18,6 @@ namespace Turns.Models
         public DateTime WorkingHoursFrom { get; set; }
         public DateTime WorkingHoursTo { get; set; }
 
-        
+        public List<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
     }
 }

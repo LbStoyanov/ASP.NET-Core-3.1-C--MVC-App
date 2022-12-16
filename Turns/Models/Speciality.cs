@@ -9,6 +9,7 @@ namespace Turns.Models
 
         public string Description { get; set; } = null!;
 
-        
+        public List<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
+
     }
 }
