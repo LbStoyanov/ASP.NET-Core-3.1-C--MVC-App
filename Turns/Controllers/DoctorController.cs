@@ -41,7 +41,7 @@ namespace Turns.Controllers
         // GET: Doctor/Create
         public IActionResult Create()
         {
-            ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+            //ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
             return View();
         }
 
