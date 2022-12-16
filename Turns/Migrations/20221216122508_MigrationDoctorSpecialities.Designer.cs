@@ -12,8 +12,8 @@ using Turns.Models;
 namespace Turns.Migrations
 {
     [DbContext(typeof(TurnsContext))]
-    [Migration("20221212202756_DoctorMigration")]
-    partial class DoctorMigration
+    [Migration("20221216122508_MigrationDoctorSpecialities")]
+    partial class MigrationDoctorSpecialities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,6 +73,21 @@ namespace Turns.Migrations
                     b.HasKey("DoctorId");
 
                     b.ToTable("Doctors", (string)null);
+                });
+
+            modelBuilder.Entity("Turns.Models.DoctorSpecialities", b =>
+                {
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpecialityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DoctorId", "SpecialityId");
+
+                    b.HasIndex("SpecialityId");
+
+                    b.ToTable("DoctorSpecialities");
                 });
 
             modelBuilder.Entity("Turns.Models.Patient", b =>
@@ -135,6 +150,35 @@ namespace Turns.Migrations
                     b.HasKey("SpecialityId");
 
                     b.ToTable("Specialities", (string)null);
+                });
+
+            modelBuilder.Entity("Turns.Models.DoctorSpecialities", b =>
+                {
+                    b.HasOne("Turns.Models.Doctor", "Doctor")
+                        .WithMany("DoctorSpecialities")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Turns.Models.Speciality", "Speciality")
+                        .WithMany("DoctorSpecialities")
+                        .HasForeignKey("SpecialityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Speciality");
+                });
+
+            modelBuilder.Entity("Turns.Models.Doctor", b =>
+                {
+                    b.Navigation("DoctorSpecialities");
+                });
+
+            modelBuilder.Entity("Turns.Models.Speciality", b =>
+                {
+                    b.Navigation("DoctorSpecialities");
                 });
 #pragma warning restore 612, 618
         }

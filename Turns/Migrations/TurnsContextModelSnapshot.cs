@@ -73,7 +73,7 @@ namespace Turns.Migrations
                     b.ToTable("Doctors", (string)null);
                 });
 
-            modelBuilder.Entity("Turns.Models.DoctorSpeciality", b =>
+            modelBuilder.Entity("Turns.Models.DoctorSpecialities", b =>
                 {
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
@@ -150,7 +150,7 @@ namespace Turns.Migrations
                     b.ToTable("Specialities", (string)null);
                 });
 
-            modelBuilder.Entity("Turns.Models.DoctorSpeciality", b =>
+            modelBuilder.Entity("Turns.Models.DoctorSpecialities", b =>
                 {
                     b.HasOne("Turns.Models.Doctor", "Doctor")
                         .WithMany("DoctorSpecialities")

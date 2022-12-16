@@ -15,11 +15,8 @@ namespace Turns.Models
         public DbSet<Patient> Patients {get; set;} = null!;
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
+        public DbSet<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
         
-
-        
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Speciality>(entity => 
@@ -106,15 +103,16 @@ namespace Turns.Models
                 .IsUnicode(false);
             });
             
-        
+            modelBuilder.Entity<DoctorSpecialities>().HasKey(x => new {x.DoctorId,x.SpecialityId});
+
+            modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Doctor)
+            .WithMany(p => p.DoctorSpecialities)
+            .HasForeignKey(p => p.DoctorId);
+
+             modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Speciality)
+            .WithMany(p => p.DoctorSpecialities)
+            .HasForeignKey(p => p.SpecialityId);
         }
-
-        
-
-
-        
-
-
-        
+ 
     }
 }
