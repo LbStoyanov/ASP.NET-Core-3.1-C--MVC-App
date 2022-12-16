@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Turns.Models;
 
@@ -40,6 +41,7 @@ namespace Turns.Controllers
         // GET: Doctor/Create
         public IActionResult Create()
         {
+            ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
             return View();
         }
 
