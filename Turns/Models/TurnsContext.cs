@@ -15,6 +15,7 @@ namespace Turns.Models
         public DbSet<Patient> Patients {get; set;} = null!;
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
+        
         public DbSet<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
