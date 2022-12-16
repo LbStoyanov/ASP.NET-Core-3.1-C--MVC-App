@@ -110,9 +110,9 @@ namespace Turns.Models
             .WithMany(p => p.DoctorSpecialities)
             .HasForeignKey(p => p.DoctorId);
 
-             modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Speciality)
+            modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Speciality)
             .WithMany(p => p.DoctorSpecialities)
-            .HasForeignKey(p => p.SpecialityId);
+            .HasForeignKey(p => p.SpecialityId); 
         }
  
     }
