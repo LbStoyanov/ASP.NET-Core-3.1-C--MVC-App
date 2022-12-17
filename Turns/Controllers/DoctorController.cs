@@ -142,6 +142,7 @@ namespace Turns.Controllers
         }
 
         // GET: Doctor/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -164,6 +165,12 @@ namespace Turns.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var doctorSpeciality = await this._context.DoctorSpecialities
+            .FirstOrDefaultAsync(ds => ds.DoctorId == id);
+
+            this._context.DoctorSpecialities.Remove(doctorSpeciality!);
+            await _context.SaveChangesAsync();
+
             var doctor = await _context.Doctors.FindAsync(id);
             _context.Doctors.Remove(doctor!);
             await _context.SaveChangesAsync();
