@@ -5,6 +5,10 @@ namespace Turns.Models
     public class Doctor
     {
      
+      /*   public Doctor()
+        {
+            this.DoctorSpecialities = new List<DoctorSpecialities>();
+        } */
 
         [Key]
         public int DoctorId { get; set; }

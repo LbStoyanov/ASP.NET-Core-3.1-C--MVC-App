@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Turns.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Turns.Controllers
 {
@@ -11,13 +11,13 @@ namespace Turns.Controllers
 
         public DoctorController(TurnsContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         // GET: Doctor
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Doctors.ToListAsync());
+            return View(await this._context.Doctors.ToListAsync());
         }
 
         // GET: Doctor/Details/5
@@ -28,7 +28,7 @@ namespace Turns.Controllers
                 return NotFound();
             }
 
-            var doctor = await _context.Doctors
+            var doctor = await this._context.Doctors
                 .FirstOrDefaultAsync(m => m.DoctorId == id);
             if (doctor == null)
             {
@@ -41,7 +41,7 @@ namespace Turns.Controllers
         // GET: Doctor/Create
         public IActionResult Create()
         {
-            //ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+            ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
             return View();
         }
 
@@ -50,12 +50,20 @@ namespace Turns.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DoctorId,FirstName,LastName,Address,PhoneNumber,Email,WorkingHoursFrom,WorkingHoursTo")] Doctor doctor)
+        public async Task<IActionResult> Create([Bind("DoctorId,FirstName,LastName,Address,PhoneNumber,Email,WorkingHoursFrom,WorkingHoursTo")] Doctor doctor, int SpecialityId)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(doctor);
-                await _context.SaveChangesAsync();
+                this._context.Add(doctor);
+                await this._context.SaveChangesAsync();
+
+                var doctorSpeciality = new DoctorSpecialities();
+                doctorSpeciality.DoctorId = doctor.DoctorId;
+                doctorSpeciality.SpecialityId = SpecialityId;
+                this._context.Add(doctorSpeciality);
+
+                await this._context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(doctor);
@@ -69,7 +77,7 @@ namespace Turns.Controllers
                 return NotFound();
             }
 
-            var doctor = await _context.Doctors.FindAsync(id);
+            var doctor = await this._context.Doctors.FindAsync(id);
             if (doctor == null)
             {
                 return NotFound();
