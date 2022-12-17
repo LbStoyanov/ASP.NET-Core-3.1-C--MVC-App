@@ -29,7 +29,9 @@ namespace Turns.Controllers
             }
 
             var doctor = await this._context.Doctors
-                .FirstOrDefaultAsync(m => m.DoctorId == id);
+                .Where(m => m.DoctorId == id).Include(ds => ds.DoctorSpecialities)
+                .ThenInclude(s => s.Speciality).FirstOrDefaultAsync();
+
             if (doctor == null)
             {
                 return NotFound();

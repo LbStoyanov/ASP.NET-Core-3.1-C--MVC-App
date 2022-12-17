@@ -59,6 +59,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.WorkingHoursTo)
         </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DoctorSpecialities[0].Speciality.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorSpecialities[0].Speciality.Description)
+        </dd>
     </dl>
 </div>
 <div>
