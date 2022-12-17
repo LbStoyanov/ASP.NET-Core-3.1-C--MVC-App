@@ -116,10 +116,13 @@ namespace Turns.Controllers
                     var doctorSpeciality = await this._context.DoctorSpecialities
                     .FirstOrDefaultAsync(ds => ds.DoctorId == id);
 
+                    this._context.Remove(doctorSpeciality!);
+                     await this._context.SaveChangesAsync();
+
                     doctorSpeciality!.SpecialityId = SpecialityId;
 
-                    this._context.Update(doctorSpeciality);
-                    
+                    this._context.Add(doctorSpeciality);
+
                     await this._context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
