@@ -70,6 +70,7 @@ namespace Turns.Controllers
         }
 
         // GET: Doctor/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,11 +78,19 @@ namespace Turns.Controllers
                 return NotFound();
             }
 
-            var doctor = await this._context.Doctors.FindAsync(id);
+            //Inner Join applied
+            var doctor = await this._context.Doctors.Where(d => d.DoctorId == id)
+            .Include(ds => ds.DoctorSpecialities).FirstOrDefaultAsync();
+
             if (doctor == null)
             {
                 return NotFound();
             }
+
+            ViewData["SpecialitiesList"] = new SelectList(
+                this._context.Specialities, "SpecialityId", "Description", doctor.DoctorSpecialities[0].SpecialityId
+            );
+
             return View(doctor);
         }
 
