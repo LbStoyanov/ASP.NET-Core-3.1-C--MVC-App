@@ -7,15 +7,36 @@
         <div class="card">
             <div class="card-image center green accent-3">
                 <i class="material-icons large">star_rate</i>
-                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <a class="btn-floating halfway-fab waves-effect waves-light red" asp-controller="Speciality"
+                    asp-action="Create"><i class="material-icons">add</i></a>
             </div>
             <div class="card-content">
                 <span class="card-title">Specialities:</span>
-                <p>Here you can register new Specialties, modify and delete them. Waiting to be assigned to a doctor.</p>
+                <p>Here you can register new Specialties, modify and delete them. Waiting to be assigned to a doctor.
+                </p>
             </div>
-           <div class="card-action">
-            <a href="#">See more</a>
-           </div>
+            <div class="card-action blue-grey darken-3">
+                <a asp-controller="Speciality" asp-action="Index">See more</a>
+            </div>
         </div>
     </div>
+
+    <div class="col s12 m6">
+        <div class="card">
+            <div class="card-image center orange darken-3">
+                <i class="material-icons large">person</i>
+                <a class="btn-floating halfway-fab waves-effect waves-light red" asp-controller="Doctor"
+                    asp-action="Create"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+                <span class="card-title">Doctors:</span>
+                <p>Here you can register new Doctors, modify their data and relate them to their specialty.
+                </p>
+            </div>
+            <div class="card-action blue-grey darken-3">
+                <a asp-controller="Doctor" asp-action="Index">See more</a>
+            </div>
+        </div>
+    </div>
+
 </div>
