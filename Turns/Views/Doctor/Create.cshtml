@@ -46,51 +46,28 @@
                         <span asp-validation-for="PhoneNumber"></span>
                     </div>
 
-                    <div>
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" />
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">local_post_office</i>
+                        <input asp-for="Email" type="tel" class="validate"/>
+                        <label asp-for="Email"></label>                        
                         <span asp-validation-for="Email"></span>
                     </div>
 
-                     <div>
+                     <div class="input-field col s12">
+                        <i class="material-icons prefix">event_note</i>
                         <label asp-for="WorkingHoursFrom"></label>
-                        <input asp-for="WorkingHoursFrom" />
+                        <input type="text" class="timepicker" />
                         <span asp-validation-for="WorkingHoursFrom"></span>
                     </div>
 
-                    <div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">event_note</i>
                         <label asp-for="WorkingHoursTo"></label>
-                        <input asp-for="WorkingHoursTo" />
+                        <input type="text" class="timepicker" />
                         <span asp-validation-for="WorkingHoursTo"></span>
                     </div>
                 </div>
 
-
-                <div>
-                    <label asp-for="Address"></label>
-                    <input asp-for="Address" />
-                    <span asp-validation-for="Address"></span>
-                </div>
-                <div>
-                    <label asp-for="PhoneNumber"></label>
-                    <input asp-for="PhoneNumber" />
-                    <span asp-validation-for="PhoneNumber"></span>
-                </div>
-                <div>
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" />
-                    <span asp-validation-for="Email"></span>
-                </div>
-                <div>
-                    <label asp-for="WorkingHoursFrom"></label>
-                    <input asp-for="WorkingHoursFrom" />
-                    <span asp-validation-for="WorkingHoursFrom"></span>
-                </div>
-                <div>
-                    <label asp-for="WorkingHoursTo"></label>
-                    <input asp-for="WorkingHoursTo" />
-                    <span asp-validation-for="WorkingHoursTo"></span>
-                </div>
                 <div>
                     <label></label>
                     <select name="SpecialityId" class="form-select" asp-items=ViewBag.SpecialitiesList></select>
