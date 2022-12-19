@@ -4,68 +4,109 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
 </head>
+
 <body>
 
-<h4>Doctor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WorkingHoursFrom" class="control-label"></label>
-                <input asp-for="WorkingHoursFrom" class="form-control" />
-                <span asp-validation-for="WorkingHoursFrom" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WorkingHoursTo" class="control-label"></label>
-                <input asp-for="WorkingHoursTo" class="form-control" />
-                <span asp-validation-for="WorkingHoursTo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label"></label>
-                <select name="SpecialityId" class="form-select" asp-items=ViewBag.SpecialitiesList></select>
-            </div>
-            <br>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Doctor</h4>
+    <hr />
+    <div class="row">
+        <div>
+            <form class="col s12" asp-action="Create">
+                <div asp-validation-summary="ModelOnly"></div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input asp-for="FirstName" type="text" class="validate">
+                        <label asp-for="FirstName"></label>
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input asp-for="LastName" type="text" class="validate">
+                        <label asp-for="LastName"></label>
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="Address" type="text" class="validate">
+                        <label asp-for="Address"></label>
+                        <span asp-validation-for="Address"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input asp-for="PhoneNumber" type="tel" class="validate">
+                        <label asp-for="PhoneNumber">Telephone</label>
+                        <span asp-validation-for="PhoneNumber"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" />
+                        <span asp-validation-for="Email"></span>
+                    </div>
+
+                     <div>
+                        <label asp-for="WorkingHoursFrom"></label>
+                        <input asp-for="WorkingHoursFrom" />
+                        <span asp-validation-for="WorkingHoursFrom"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="WorkingHoursTo"></label>
+                        <input asp-for="WorkingHoursTo" />
+                        <span asp-validation-for="WorkingHoursTo"></span>
+                    </div>
+                </div>
+
+
+                <div>
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" />
+                    <span asp-validation-for="Address"></span>
+                </div>
+                <div>
+                    <label asp-for="PhoneNumber"></label>
+                    <input asp-for="PhoneNumber" />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div>
+                <div>
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div>
+                    <label asp-for="WorkingHoursFrom"></label>
+                    <input asp-for="WorkingHoursFrom" />
+                    <span asp-validation-for="WorkingHoursFrom"></span>
+                </div>
+                <div>
+                    <label asp-for="WorkingHoursTo"></label>
+                    <input asp-for="WorkingHoursTo" />
+                    <span asp-validation-for="WorkingHoursTo"></span>
+                </div>
+                <div>
+                    <label></label>
+                    <select name="SpecialityId" class="form-select" asp-items=ViewBag.SpecialitiesList></select>
+                </div>
+                <br>
+                <div>
+                    <input type="submit" value="Create" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
- <br>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <br>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
 </body>
+
 </html>
