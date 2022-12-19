@@ -2,8 +2,11 @@
     ViewData["Title"] = "Home Page";
 }
 
+<br>
+<br>
+<br>
 <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12 m4">
         <div class="card">
             <div class="card-image center green accent-3">
                 <i class="material-icons large">star_rate</i>
@@ -21,7 +24,7 @@
         </div>
     </div>
 
-    <div class="col s12 m6">
+    <div class="col s12 m4">
         <div class="card">
             <div class="card-image center orange darken-3">
                 <i class="material-icons large">person</i>
@@ -35,6 +38,24 @@
             </div>
             <div class="card-action blue-grey darken-3">
                 <a asp-controller="Doctor" asp-action="Index">See more</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image center cyan accent-3">
+                <i class="material-icons large">assignment_ind</i>
+                <a class="btn-floating halfway-fab waves-effect waves-light red" asp-controller="Patient"
+                    asp-action="Create"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+                <span class="card-title">Patients:</span>
+                <p>Here you can register new Patients, modify their data or delete them from the database.
+                </p>
+            </div>
+            <div class="card-action blue-grey darken-3">
+                <a asp-controller="Patient" asp-action="Index">See more</a>
             </div>
         </div>
     </div>
