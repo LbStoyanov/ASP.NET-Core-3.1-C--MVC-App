@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="input-field col s12">
-                         <i class="material-icons prefix">markunread_mailbox</i>
+                        <i class="material-icons prefix">markunread_mailbox</i>
                         <input asp-for="Address" type="text" class="validate">
                         <label asp-for="Address"></label>
                         <span asp-validation-for="Address"></span>
@@ -49,12 +49,12 @@
 
                     <div class="input-field col s12">
                         <i class="material-icons prefix">local_post_office</i>
-                        <input asp-for="Email" type="tel" class="validate"/>
-                        <label asp-for="Email"></label>                        
+                        <input asp-for="Email" type="tel" class="validate" />
+                        <label asp-for="Email"></label>
                         <span asp-validation-for="Email"></span>
                     </div>
 
-                     <div class="input-field col s12">
+                    <div class="input-field col s12">
                         <i class="material-icons prefix">event_note</i>
                         <label asp-for="WorkingHoursFrom"></label>
                         <input type="text" class="timepicker" />
@@ -69,22 +69,27 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="input-field col s12">
                     <i class="material-icons prefix">star_rate</i>
                     <select name="SpecialityId" class="form-select" asp-items=ViewBag.SpecialitiesList></select>
                 </div>
                 <br>
-                <div>
-                    <input type="submit" value="Create" />
+                <div class="row">
+                    <div class="col s6 s6">
+                        <button class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
+                    <div class="col s6 s6">
+                        <a class="waves-effect waves-light btn grey darken-4" asp-action="Index"><i
+                                class="material-icons left">undo</i>back</a>
+                    </div>
                 </div>
+
             </form>
         </div>
     </div>
-    <br>
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
 </body>
 
 </html>
