@@ -34,6 +34,7 @@
                     </div>
 
                     <div class="input-field col s12">
+                         <i class="material-icons prefix">markunread_mailbox</i>
                         <input asp-for="Address" type="text" class="validate">
                         <label asp-for="Address"></label>
                         <span asp-validation-for="Address"></span>
@@ -69,7 +70,7 @@
                 </div>
 
                 <div>
-                    <label></label>
+                    <i class="material-icons prefix">star_rate</i>
                     <select name="SpecialityId" class="form-select" asp-items=ViewBag.SpecialitiesList></select>
                 </div>
                 <br>
