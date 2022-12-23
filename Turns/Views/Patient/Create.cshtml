@@ -3,35 +3,38 @@
 <h4>Patient</h4>
 
 <div>
-    <form asp-action="Create">
+    <form class="col s12" asp-action="Create">
         <div asp-validation-summary="ModelOnly"></div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input asp-for="FirstName" type="text" class="validate">
+                <label asp-for="FirstName"></label>
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div>
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div>
+                <label asp-for="Direction"></label>
+                <input asp-for="Direction" />
+                <span asp-validation-for="Direction"></span>
+            </div>
+            <div>
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" />
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+            <div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+        </div>
         <div>
-            <label asp-for="FirstName"></label>
-            <input asp-for="FirstName"/>
-            <span asp-validation-for="FirstName"></span>
-        </div>
-         <div>
-            <label asp-for="LastName"></label>
-            <input asp-for="LastName"/>
-            <span asp-validation-for="LastName"></span>
-        </div>
-         <div>
-            <label asp-for="Direction"></label>
-            <input asp-for="Direction"/>
-            <span asp-validation-for="Direction"></span>
-        </div>
-          <div>
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber"/>
-            <span asp-validation-for="PhoneNumber"></span>
-        </div>
-          <div>
-            <label asp-for="Email"></label>
-            <input asp-for="Email"/>
-            <span asp-validation-for="Email"></span>
-        </div>
-        <div>
-            <input type="submit" value="Save"/>
+            <input type="submit" value="Save" />
         </div>
     </form>
 </div>
