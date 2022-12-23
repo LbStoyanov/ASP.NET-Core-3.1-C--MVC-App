@@ -1,31 +1,44 @@
 @model IEnumerable<Turns.Models.Speciality>
 
-<p>
-    <a asp-action="Create">New</a>
-</p>
+<!DOCTYPE html>
+<html lang="en">
 
-<table>
-    <thead>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>
+    <p>
+        <a asp-action="Create"class="btn-floating btn-large orange darken-2"><i class="material-icons">add_circle</i></a>
+    </p>
+
+    <table class="responsive-table highlight z-depth-3 blue lighten-5">
+        <thead class="blue darken-1 white-text">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th></th>
         </tr>
     </thead>
-    <tbody>
-        @*Here we put the code to show the registers from DB*@
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.SpecialityId">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.SpecialityId">Delete</a>
-                </td>
-            </tr>
-        }
+        <tbody>
+            @*Here we put the code to show the registers from DB*@
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td style="text-align: right;">
+                        <a asp-action="Edit" asp-route-id="@item.SpecialityId"><i class="material-icons">edit</i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.SpecialityId"><i class="material-icons red-text">delete_forever</i></a>
+                    </td>
+                </tr>
+            }
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</body>
+
+</html>
