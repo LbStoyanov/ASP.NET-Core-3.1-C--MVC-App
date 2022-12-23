@@ -1,42 +1,67 @@
 @model Turns.Models.Patient
 
-<h4>Patient</h4>
-<div>
-    <dl> @* Description list *@
-        <dt> @* Description text *@
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd> @* Description data *@
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Direction)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Direction)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
-</div>
+<!DOCTYPE html>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PatientId">Edit</a> |
-    <a asp-action="Index">Back</a>
-</div>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+
+<body>
+
+    <div>
+        <h5>Patient</h5>
+        <hr />
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card hoverable blue darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">
+                            <h5><b>@Html.DisplayFor(model => model.FirstName), @Html.DisplayFor(model =>
+                                    model.LastName)</b></h5>
+                        </span>
+                        <dt>
+                            <h6>@Html.DisplayNameFor(model => model.FirstName): @Html.DisplayFor(model =>
+                                model.FirstName)</h6>
+                        </dt>
+                        <hr />
+                        <dt>
+                            <h6>@Html.DisplayNameFor(model => model.LastName): @Html.DisplayFor(model => model.LastName)
+                            </h6>
+                        </dt>
+                        <hr />
+                        <dt>
+                            <h6>@Html.DisplayNameFor(model => model.Direction): @Html.DisplayFor(model => model.Direction)
+                            </h6>
+                        </dt>
+                        <hr />
+                        <dt>
+                            <h6>@Html.DisplayNameFor(model => model.PhoneNumber): @Html.DisplayFor(model =>
+                                model.PhoneNumber)</h6>
+                        </dt>
+                        <hr />
+                        <dt>
+                            <h6>@Html.DisplayNameFor(model => model.Email): @Html.DisplayFor(model => model.Email)</h6>
+                        </dt>
+                        <hr />
+                        
+
+                    </div>
+                    <div class="card-action blue-grey darken-2">
+                        <form asp-action="Edit">
+                            <input type="hidden" asp-for="PatientId" />
+                            <a class="waves-effect waves-light btn-small orange accent-4 black-text" asp-action="Edit"
+                                asp-route-id="@Model.PatientId">Edit</a>
+                            <a asp-action="Index"
+                                class="waves-effect waves-light btn-small orange accent-4 right black-text">Back</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
