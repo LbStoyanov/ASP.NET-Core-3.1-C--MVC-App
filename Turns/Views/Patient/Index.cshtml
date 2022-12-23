@@ -1,11 +1,11 @@
 @model IEnumerable<Turns.Models.Patient>
 
 <p>
-    <a asp-action="Create">New</a>
+    <a asp-action="Create" class="btn-floating btn-large green darken-2"><i class="material-icons">person_add</i></a>
 </p>
 
-<table>
-    <thead>
+<table class="responsive-table highlight z-depth-3 blue lighten-5">
+    <thead class="blue darken-1 white-text">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -44,10 +44,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.PatientId">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.PatientId">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.PatientId">Delete</a>
+                <td style="text-align: right;">
+                    <a asp-action="Edit" asp-route-id="@item.PatientId"><i class="material-icons">edit</i></a>
+                    <a asp-action="Details" asp-route-id="@item.PatientId"><i class="material-icons grey-text">more_vert</i></a>
+                    <a asp-action="Delete" asp-route-id="@item.PatientId"><i class="material-icons red-text">delete_forever</i></a>
                 </td>
             </tr>
         }
