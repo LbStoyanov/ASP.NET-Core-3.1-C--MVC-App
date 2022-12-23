@@ -12,32 +12,41 @@
                 <label asp-for="FirstName"></label>
                 <span asp-validation-for="FirstName"></span>
             </div>
-            <div>
+            <div class="input-field col s6">
+                <input asp-for="LastName" type="text" class="validate">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName" />
                 <span asp-validation-for="LastName"></span>
             </div>
-            <div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">markunread_mailbox</i>
+                <input asp-for="Direction" type="text" class="validate">
                 <label asp-for="Direction"></label>
-                <input asp-for="Direction" />
                 <span asp-validation-for="Direction"></span>
             </div>
-            <div>
-                <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber" />
+            <div class="input-field col s12">
+                <i class="material-icons prefix">phone</i>
+                <input asp-for="PhoneNumber" type="tel" class="validate">
+                <label asp-for="PhoneNumber">Telephone</label>
                 <span asp-validation-for="PhoneNumber"></span>
             </div>
-            <div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">local_post_office</i>
+                <input asp-for="Email" type="tel" class="validate" />
                 <label asp-for="Email"></label>
-                <input asp-for="Email" />
                 <span asp-validation-for="Email"></span>
             </div>
         </div>
-        <div>
-            <input type="submit" value="Save" />
+        <div class="row">
+            <div class="col s6 s6">
+                <button class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+
+            <div class="col s6 s6">
+                <a class="waves-effect waves-light btn grey darken-4" asp-action="Index"><i
+                        class="material-icons left">undo</i>back</a>
+            </div>
         </div>
     </form>
-</div>
-<div>
-    <a asp-action="Index">Back</a>
 </div>
