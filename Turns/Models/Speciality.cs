@@ -11,7 +11,8 @@ namespace Turns.Models
 
         [Key]
         public int SpecialityId { get; set; }
-
+        
+        [Display(Prompt = "Enter a speciality")]
         public string Description { get; set; } = null!;
 
         public List<DoctorSpecialities> DoctorSpecialities { get; set; } 
