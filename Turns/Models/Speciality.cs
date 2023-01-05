@@ -12,6 +12,7 @@ namespace Turns.Models
         [Key]
         public int SpecialityId { get; set; }
         
+        //[StringLength(200)]
         [Display(Prompt = "Enter a speciality")]
         public string Description { get; set; } = null!;
 
