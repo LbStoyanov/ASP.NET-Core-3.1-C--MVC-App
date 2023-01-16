@@ -26,5 +26,7 @@ namespace Turns.Models
         [EmailAddress]
         public string Email { get; set; } = null!;
 
+        public List<Turn> Turns {get; set;} = null!;
+
     }
 }
