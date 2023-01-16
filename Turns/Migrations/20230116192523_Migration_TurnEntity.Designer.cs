@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Turns.Models;
 
@@ -11,9 +12,10 @@ using Turns.Models;
 namespace Turns.Migrations
 {
     [DbContext(typeof(TurnsContext))]
-    partial class TurnsContextModelSnapshot : ModelSnapshot
+    [Migration("20230116192523_Migration_TurnEntity")]
+    partial class Migration_TurnEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

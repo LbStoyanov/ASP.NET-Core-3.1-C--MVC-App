@@ -8,6 +8,7 @@ namespace Turns.Models
         public Doctor()
         {
             this.DoctorSpecialities = new List<DoctorSpecialities>();
+            this.Turns = new List<Turn>();
         }
 
         [Key]
@@ -45,5 +46,7 @@ namespace Turns.Models
         public DateTime WorkingHoursTo { get; set; }
 
         public List<DoctorSpecialities> DoctorSpecialities { get; set; } 
+
+        public List<Turn> Turns {get; set;}
     }
 }

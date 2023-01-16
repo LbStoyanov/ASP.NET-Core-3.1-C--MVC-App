@@ -17,6 +17,7 @@ namespace Turns.Models
         public DbSet<Doctor> Doctors { get; set; } = null!;
         
         public DbSet<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
+        public DbSet<Turn> Turns { get; set; } = null!;
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -113,7 +114,39 @@ namespace Turns.Models
             modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Speciality)
             .WithMany(p => p.DoctorSpecialities)
             .HasForeignKey(p => p.SpecialityId); 
+
+            modelBuilder.Entity<Turn>(entity => {
+                entity.ToTable("Turns");
+
+                entity.HasKey(d => d.TurnId);
+
+                entity.Property(d => d.PatienId)
+                .IsRequired()
+                .IsUnicode(false);
+
+                entity.Property(d => d.DoctorId)
+                .IsRequired()
+                .IsUnicode(false);
+
+                entity.Property(d => d.DateTimeStart)
+                .IsRequired()
+                .IsUnicode(false);
+
+                entity.Property(d => d.DateTimeEnd)
+                .IsRequired()
+                .IsUnicode(false);
+            }); 
+            
+             modelBuilder.Entity<Turn>().HasOne(x => x.Patient)
+            .WithMany(p => p.Turns)
+            .HasForeignKey(p => p.PatienId);
+
+             modelBuilder.Entity<Turn>().HasOne(x => x.Doctor)
+            .WithMany(p => p.Turns)
+            .HasForeignKey(p => p.DoctorId);
+
         }
+
  
     }
 }
