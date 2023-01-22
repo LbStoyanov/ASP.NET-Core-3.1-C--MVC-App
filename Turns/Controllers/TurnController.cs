@@ -55,5 +55,31 @@ namespace Turns.Controllers
 
             return Json(jsonResult);
         }
+
+        [HttpPost]
+        public JsonResult DeleteTurn (int turnId)
+        {
+            var ok =  false;
+
+            try
+            {
+                var turnForDelete = _context.Turns.Where(t => t.TurnId == turnId).FirstOrDefault();
+                if (turnForDelete != null)
+                {
+                    _context.Turns.Remove(turnForDelete);
+                    _context.SaveChangesAsync();
+                    ok = true;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                 Console.WriteLine($"{ex} Exception found!");
+            }
+
+            var jsonResult = new { ok = ok };
+
+            return Json(jsonResult);
+        }
     }
 }
