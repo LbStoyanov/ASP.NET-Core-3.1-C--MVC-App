@@ -20,6 +20,10 @@ namespace Turns.Controllers
         {
             ViewData["DoctorId"] = 
             new SelectList((from doctor in _context.Doctors.ToList() select new { DoctorId = doctor.DoctorId, FullName = doctor.FirstName + " " + doctor.LastName}),"DoctorId", "FullName");
+            
+            ViewData["PatientId"] = 
+            new SelectList((from patient in _context.Patients.ToList() select new { PatientId = patient.PatientId, FullName = patient.FirstName + " " + patient.LastName}),"PatientId", "FullName");
+
             return View();
         }
     }
