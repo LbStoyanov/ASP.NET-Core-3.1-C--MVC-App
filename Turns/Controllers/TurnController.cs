@@ -26,5 +26,34 @@ namespace Turns.Controllers
 
             return View();
         }
+
+        public JsonResult ReceiveTurns (int doctorId)
+        {
+            List<Turn> turns = new List<Turn>();
+            turns = _context.Turns.Where(t => t.DoctorId == doctorId).ToList();
+
+            return Json(turns);
+        }
+
+        [HttpPost]
+        public JsonResult SaveTurn(Turn turn)
+        {
+            var ok =  false;
+
+            try
+            {
+                _context.Turns.Add(turn);
+                _context.SaveChangesAsync();
+                ok = true;
+            }
+            catch (Exception ex)
+            {
+                 Console.WriteLine($"{ex} Exception found!");
+            }
+
+            var jsonResult = new { ok = ok };
+
+            return Json(jsonResult);
+        }
     }
 }
