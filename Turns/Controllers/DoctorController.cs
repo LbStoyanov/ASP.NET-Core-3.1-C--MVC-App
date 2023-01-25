@@ -183,5 +183,12 @@ namespace Turns.Controllers
         {
             return _context.Doctors.Any(e => e.DoctorId == id);
         }
+
+        public string SetWorkingTimeFrom (int doctorId)
+        {
+            var WorkingHoursFrom = _context.Doctors.Where(m => m.DoctorId == doctorId).FirstOrDefault()!.WorkingHoursFrom;
+
+            return WorkingHoursFrom.Hour + ":" + WorkingHoursFrom.Minute;
+        }
     }
 }
