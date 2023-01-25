@@ -190,5 +190,12 @@ namespace Turns.Controllers
 
             return WorkingHoursFrom.Hour + ":" + WorkingHoursFrom.Minute;
         }
+
+         public string SetWorkingTimeTo (int doctorId)
+        {
+            var WorkingHoursTo = _context.Doctors.Where(m => m.DoctorId == doctorId).FirstOrDefault()!.WorkingHoursFrom;
+
+            return WorkingHoursTo.Hour + ":" + WorkingHoursTo.Minute;
+        }
     }
 }
