@@ -19,4 +19,17 @@
 
 <div id="HoursCalendar"></div>
 
-<link href="~/fullcalendar/fullcalendar.css" rel="stylesheet">
+<link href="~fullCalendar/fullcalendar/fullcalendar.css" rel="stylesheet">
+<link href="~fullCalendar/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print">
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="~/fullCalendar/fullcalendar/fullcalendar.in.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#HoursCalendar').fullCalendar({
+             
+            })
+        })
+    </script>
+}
