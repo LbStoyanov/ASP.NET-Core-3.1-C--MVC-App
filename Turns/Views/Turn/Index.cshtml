@@ -32,14 +32,27 @@
 
             $.ajax({
                 type: "GET",
-                url: "Doctor/SetWorkingTimeTo",
+                url: "Doctor/SetWorkingTimeFrom",
                 data: {"doctorId": $('#DoctorId').val() },
                 async: false,
                 success: function (result){
                     workingTimeFrom = result;
                 },
                 error: function () {
-                    alert("Error: Selected doctor's working time is not found! ");
+                    alert("Error: Selected doctor's working time from is not found! ");
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "Doctor/SetWorkingTimeTo",
+                data: {"doctorId": $('#DoctorId').val() },
+                async: false,
+                success: function (result){
+                    workingTimeTo = result;
+                },
+                error: function () {
+                    alert("Error: Selected doctor's working time to is not found! ");
                 }
             });
 

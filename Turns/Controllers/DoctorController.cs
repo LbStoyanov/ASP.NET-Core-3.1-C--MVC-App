@@ -193,7 +193,7 @@ namespace Turns.Controllers
 
          public string SetWorkingTimeTo (int doctorId)
         {
-            var WorkingHoursTo = _context.Doctors.Where(m => m.DoctorId == doctorId).FirstOrDefault()!.WorkingHoursFrom;
+            var WorkingHoursTo = _context.Doctors.Where(m => m.DoctorId == doctorId).FirstOrDefault()!.WorkingHoursTo;
 
             return WorkingHoursTo.Hour + ":" + WorkingHoursTo.Minute;
         }
