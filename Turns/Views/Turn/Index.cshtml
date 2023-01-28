@@ -31,11 +31,13 @@
             var workingTimeTo = "";
             var turns = [];
 
+            GetTurnsAndUpdateCalendar($('#DoctorId').val());
+
             function GetTurnsAndUpdateCalendar (doctorId){
                 turns = [];
                 $.ajax({
                     type: 'GET',
-                    url: "Turns/GetTurns",
+                    url: "Turn/GetTurns",
                     data: { 'DoctorId': doctorId },
                     success: function (data) {
                         $.each(data, function (i, v){
@@ -47,6 +49,10 @@
                                 end: v.workingTimeEnd != null ? moment(v.workingTimeEnd) : null,
                             })
                         })
+                        GenerateCalendar(turns);
+                    },
+                    error: function (){
+                        alert('Error when try go get turns!');
                     }
                 })
             }
