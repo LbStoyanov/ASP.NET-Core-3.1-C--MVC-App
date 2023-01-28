@@ -27,6 +27,22 @@
     <script src="~/fullcalendar/fullcalendar.min.js"></script>
     <script>
         $(document).ready(function () {
+            var workingTimeFrom = "";
+            var workingTimeTo = "";
+
+            $.ajax({
+                type: "GET",
+                url: "Doctor/SetWorkingTimeTo",
+                data: {"doctorId": $('#DoctorId').val() },
+                async: false,
+                success: function (result){
+                    workingTimeFrom = result;
+                },
+                error: function () {
+                    alert("Error: Selected doctor's working time is not found! ");
+                }
+            });
+
             $('#HoursCalendar').fullCalendar({
                 contentHeight: 'auto',
                 defaultDate: new Date(),
@@ -38,6 +54,11 @@
                 },
                 slotDuration: '00:30',
                 nowIndicator: true,
+                allDaySlot: false,
+                selectable: true,
+                eventLimit: true,
+                minTime: workingTimeFrom,
+                maxTime: workingTimeTo,
             })
         })
     </script>
