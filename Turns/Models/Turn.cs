@@ -6,7 +6,7 @@ namespace Turns.Models
     {
         [Key]
         public int TurnId { get; set; }
-        public int PatienId { get; set; }
+        public int PatientId { get; set; }
         public int DoctorId { get; set; }
         [Display(Name = "Date Time Start")] //TODO:Turn start at
         public DateTime DateTimeStart { get; set; }

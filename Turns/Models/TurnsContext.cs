@@ -120,7 +120,7 @@ namespace Turns.Models
 
                 entity.HasKey(d => d.TurnId);
 
-                entity.Property(d => d.PatienId)
+                entity.Property(d => d.PatientId)
                 .IsRequired()
                 .IsUnicode(false);
 
@@ -139,7 +139,7 @@ namespace Turns.Models
             
              modelBuilder.Entity<Turn>().HasOne(x => x.Patient)
             .WithMany(p => p.Turns)
-            .HasForeignKey(p => p.PatienId);
+            .HasForeignKey(p => p.PatientId);
 
              modelBuilder.Entity<Turn>().HasOne(x => x.Doctor)
             .WithMany(p => p.Turns)

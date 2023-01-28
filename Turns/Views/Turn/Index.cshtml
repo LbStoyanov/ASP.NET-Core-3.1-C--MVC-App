@@ -1,0 +1,16 @@
+@model Turns.Models.Turn;
+
+@{
+    ViewBag.Title = "Assign hours";
+}
+
+<div class="row">
+    <div class="col s6">
+        <label asp-for="DoctorId">Doctor</label>
+        <select asp-for="DoctorId" asp-items="ViewBag.DoctorId"></select>
+    </div>
+      <div class="col s6">
+        <label asp-for="PatientId">Patient</label>
+        <select asp-for="PatientId" asp-items="ViewBag.PatientId"></select>
+    </div>
+</div>
