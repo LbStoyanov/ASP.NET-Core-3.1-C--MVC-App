@@ -29,8 +29,31 @@
         $(document).ready(function () {
             var workingTimeFrom = "";
             var workingTimeTo = "";
+            var turns = [];
 
-            $.ajax({
+            function GetTurnsAndUpdateCalendar (doctorId){
+                turns = [];
+                $.ajax({
+                    type: 'GET',
+                    url: "Turns/GetTurns",
+                    data: { 'DoctorId': doctorId },
+                    success: function (data) {
+                        $.each(data, function (i, v){
+                            turns.push({
+                                turnId: v.turnId,
+                                patientId: v.patientId,
+                                doctorId: v.doctorId,
+                                start: moment(v.workingTimeStart),
+                                end: v.workingTimeEnd != null ? moment(v.workingTimeEnd) : null,
+                            })
+                        })
+                    }
+                })
+            }
+
+            function GenerateCalendar (turns){
+
+                $.ajax({
                 type: "GET",
                 url: "Doctor/SetWorkingTimeFrom",
                 data: {"doctorId": $('#DoctorId').val() },
@@ -56,6 +79,8 @@
                 }
             });
 
+            $('#HoursCalendar').fullCalendar('destroy');
+
             $('#HoursCalendar').fullCalendar({
                 contentHeight: 'auto',
                 defaultDate: new Date(),
@@ -73,6 +98,8 @@
                 minTime: workingTimeFrom,
                 maxTime: workingTimeTo,
             })
+            }
+            
         })
     </script>
 }
