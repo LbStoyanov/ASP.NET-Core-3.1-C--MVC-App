@@ -37,12 +37,12 @@ namespace Turns.Models
 
         [Display(Name = "Working hours from")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:t}", ApplyFormatInEditMode = true)]
         public DateTime WorkingHoursFrom { get; set; }
 
         [Display(Name = "Working hours to")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}" , ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:t}" , ApplyFormatInEditMode = true)]
         public DateTime WorkingHoursTo { get; set; }
 
         public List<DoctorSpecialities> DoctorSpecialities { get; set; } 
