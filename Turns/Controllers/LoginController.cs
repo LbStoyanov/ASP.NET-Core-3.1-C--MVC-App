@@ -5,11 +5,11 @@ using Turns.Models;
 
 namespace Turns.Controllers
 {
-    public class LogginController : Controller
+    public class LoginController : Controller
     {
         private readonly TurnsContext _context;
 
-        public LogginController(TurnsContext context)
+        public LoginController(TurnsContext context)
         {
             this._context = context;
         }
@@ -24,6 +24,20 @@ namespace Turns.Controllers
             if(ModelState.IsValid)
             {
                 string encryptedPassword = Encrypt(login.Password);
+
+                var userLogin = _context.Logins.Where(l => l.Username  == login.Username && l.Password == encryptedPassword)
+                .FirstOrDefault();
+                
+                if(userLogin != null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewData["errorLogin"] = "The entered credentials are invalid!";
+                    return View("Index");
+                }
+
             }
 
             return View("Index");
