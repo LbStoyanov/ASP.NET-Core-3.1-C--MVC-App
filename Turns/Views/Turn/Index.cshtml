@@ -1,7 +1,7 @@
 @model Turns.Models.Turn
 
 @{
-    ViewBag.Title = "Test";
+    ViewBag.Title = "Assign hour";
 }
 
 <div class="row">
@@ -15,6 +15,23 @@
     </div>
 </div>
 <br>
+
+<div id="ModalTurn" class="modal">
+    <div class="modal-content">
+        <h4>Turn</h4>
+        <form>
+            <div>
+                <label>Start</label>
+                <input type="text" id="txtWorkingTimeFrom" readonly="readonly"/>
+            </div>
+            <div>
+                <label>End</label>
+                <input type="text" id="txtWorkingTimeTo" readonly="readonly"/>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div id="HoursCalendar"></div>
 
 <link href="~/fullcalendar/fullcalendar.css" rel="stylesheet"/>
@@ -25,9 +42,91 @@
     <script src="~/fullcalendar/locale/en-gb.js"></script>
     <script>
         $(document).ready(function (){
-            $('#HoursCalendar').fullCalendar({
-                
-            })
+            let workingTimeFrom = '';
+            let workingTimeTo = '';
+            let turns = [];
+
+            GetTurnsAndUpdateCalendar($('#DoctorId').val());
+
+            $('#DoctorId').change(function () {
+                GetTurnsAndUpdateCalendar(this.value);
+            });
+
+            function GetTurnsAndUpdateCalendar(doctorId){
+                turns = [];
+                $.ajax({
+                    type: 'GET',
+                    url: 'Turn/GetTurns',
+                    data: { 'DoctorId': doctorId},
+                    success: function (data){
+                        $.each(data, function (i, v){
+                            turns.push({
+                                turnId: v.turnId,
+                                patientId: v.patientId,
+                                doctorId: v.doctorId,
+                                start: moment(v.workingTimeFrom),
+                                end: v.workingTimeTo != null ? moment(v.workingTimeTo) : null,
+                            })
+                        })
+                        GenerateCalendar(turns);
+                    },
+                    error: function(){
+                        alert('Something went wrong when try to load turns!!');
+                    }
+                })
+            }
+
+            function GenerateCalendar(turns){
+                 $.ajax({
+                    type: 'GET',
+                    url: 'Doctor/SetWorkingTimeFrom',
+                    data:{ 'doctorId': $('#DoctorId').val()},
+                    async: false,
+                    success: function (result){
+                        workingTimeFrom = result;
+                    },
+                    error: function(){
+                        alert('Something went wrong when load the working hour!');
+                    }
+                })
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'Doctor/SetWorkingTimeTo',
+                    data:{ 'doctorId': $('#DoctorId').val()},
+                    async: false,
+                    success: function (result){
+                        workingTimeTo = result;
+                    },
+                    error: function(){
+                        alert('Something went wrong when load the working hour!');
+                    }
+                })
+
+                $('#HoursCalendar').fullCalendar('destroy');
+
+                $('#HoursCalendar').fullCalendar({
+                    contentHeight: 'auto',
+                    defaulfDate: new Date(),
+                    slotLabelFormat: 'HH:mm',
+                    defaultView: 'agendaWeek',
+                    header:{
+                        left: 'prev,next,today',
+                        right: 'month,agendaWeek,agendaDay',
+                    },
+                    slotDuration: '00:30',
+                    nowIndicator: true,
+                    allDaySlot: false,
+                    selectable: true,
+                    eventLimit: true,
+                    minTime: workingTimeFrom,
+                    maxTime: workingTimeTo,
+                    events: turns,
+                })
+            }
+
+            
+
         })
     </script>
 }
