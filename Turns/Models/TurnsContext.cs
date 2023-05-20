@@ -18,6 +18,8 @@ namespace Turns.Models
         
         public DbSet<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
         public DbSet<Turn> Turns { get; set; } = null!;
+
+        public DbSet<Login> Logins { get; set; } = null!;
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -144,6 +146,16 @@ namespace Turns.Models
              modelBuilder.Entity<Turn>().HasOne(x => x.Doctor)
             .WithMany(p => p.Turns)
             .HasForeignKey(p => p.DoctorId);
+
+            modelBuilder.Entity<Login>(entity => {
+                entity.ToTable("Login");
+                entity.HasKey(l => l.LoginId);
+                entity.Property(l => l.Username)
+                .IsRequired();
+
+                entity.Property(l => l.Password)
+                .IsRequired();
+            });
 
         }
 

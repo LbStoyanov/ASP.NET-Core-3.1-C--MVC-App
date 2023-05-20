@@ -28,6 +28,10 @@
                 <label>End</label>
                 <input type="text" id="txtWorkingTimeTo" readonly="readonly"/>
             </div>
+            <div>
+                <label>Patient</label>
+                <input type="text" id="txtPatient" readonly="readonly"/>
+            </div>
         </form>
     </div>
     <div class="modal-footer">
@@ -48,10 +52,10 @@
     <script>
         $(document).ready(function (){
             $('.modal').modal();
-            let workingTimeFrom = '';
-            let workingTimeTo = '';
-            let turns = [];
-            let selectedTurn = [];
+            var workingTimeFrom = "";
+            var workingTimeTo = "";
+            var turns = [];
+            var selectedTurn = [];
 
             GetTurnsAndUpdateCalendar($('#DoctorId').val());
 
@@ -73,6 +77,7 @@
                                 doctorId: v.doctorId,
                                 start: moment(v.workingTimeFrom),
                                 end: v.workingTimeTo != null ? moment(v.workingTimeTo) : null,
+                                patient: v.patient
                             })
                         })
                         GenerateCalendar(turns);
@@ -95,30 +100,30 @@
                     error: function(){
                         alert('Something went wrong when load the working hour!');
                     }
-                })
+                });
 
                 $.ajax({
-                    type: 'GET',
-                    url: 'Doctor/SetWorkingTimeTo',
-                    data:{ 'doctorId': $('#DoctorId').val()},
+                    type: "GET",
+                    url: "Doctor/SetWorkingTimeTo",
+                    data:{ "doctorId": $('#DoctorId').val()},
                     async: false,
                     success: function (result){
                         workingTimeTo = result;
                     },
-                    error: function(){
+                    error: function() {
                         alert('Something went wrong when load the working hour!');
                     }
-                })
+                });
 
                 $('#HoursCalendar').fullCalendar('destroy');
 
                 $('#HoursCalendar').fullCalendar({
                     contentHeight: 'auto',
-                    defaulfDate: new Date(),
+                    defaultDate: new Date(),
                     slotLabelFormat: 'HH:mm',
                     defaultView: 'agendaWeek',
                     header:{
-                        left: 'prev,next,today',
+                        left: 'prev,next today',
                         right: 'month,agendaWeek,agendaDay',
                     },
                     slotDuration: '00:30',
@@ -150,15 +155,17 @@
                 if(selectedTurn.turnId == 0){
                     $('#btnSave').show();
                     $('#btnDelete').hide();
+                    $('#txtPatient').val($('#PatientId option:selected').text());
                 }else{
                     $('#btnSave').hide();
                     $('#btnDelete').show();
+                    $('#txtPatient').val(selectedTurn.patient);
                 }
                 $('#ModalTurn').modal('open');
             }
             
             $('#btnSave').click(function(){
-                let turnData = {
+                var turnData = {
                     PatientId: $('#PatientId').val(),
                     DoctorId: $('#DoctorId').val(),
                     workingTimeFrom: $('#txtWorkingTimeFrom').val(),
