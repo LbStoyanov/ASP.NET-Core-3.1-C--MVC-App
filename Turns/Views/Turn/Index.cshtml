@@ -17,6 +17,27 @@
 
 <br>
 
+<div id="ModalTurn" class="modal">
+    <div class="modal-content">
+        <h4>Turn</h4>
+        <form>
+            <div>
+                <label>Start</label>
+                <input type="text" id="txtWorkingTimeFrom" readonly/>
+            </div>
+            <div>
+                <label>End</label>
+                <input type="text" id="txtWorkingTimeTo" readonly/>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#" id="btnDelete" class="modal-close waves-effect waves-red btn-flat">Delete</a>
+        <a href="#" id="btnSave" class="modal-close waves-effect waves-green btn-flat">Save</a>
+        <a href="#" id="btnClose" class="modal-close waves-effect waves-grey btn-flat">Close</a>
+    </div>
+</div>
+
 <div id="HoursCalendar"></div>
 
 <link href="~/fullcalendar/fullcalendar.css" rel="stylesheet"/>
@@ -28,17 +49,23 @@
     <script src="~/fullcalendar/locale/bg.js"><script/>
     <script>
         $(document).ready(function () {
+            $('.modal').modal();
             var workingTimeFrom = "";
             var workingTimeTo = "";
             var turns = [];
+            var selectedTurn = [];
 
             GetTurnsAndUpdateCalendar($('#DoctorId').val());
+
+            $('#DoctorId').change(function(){
+                    GetTurnsAndUpdateCalendar(this.value);
+                });
 
             function GetTurnsAndUpdateCalendar(doctorId){
                 turns = [];
                 $.ajax({
                     type: 'GET',
-                    url: "Turns/GetTurns",
+                    url: "Turn/GetTurns",
                     data: { 'DoctorId': doctorId },
                     success: function (data) {
                         $.each(data, function (i, v){
@@ -104,9 +131,29 @@
                     eventLimit: true,
                     minTime: workingTimeFrom,
                     maxTime: workingTimeTo,
+                    events: turns,
+                    select: function(workingTimeFrom, workingTimeTo){
+                        selectedTurn = {
+                            turnId: 0,
+                            start: workingTimeFrom,
+                            end: workingTimeTo
+                        };
+                        OpenPopup();
+                    }
                 })
             }
-            
+
+            function OpenPopup(){
+                $('#txtWorkingTimeFrom').val(selectedTurn.start.format('DD/MM/YYYY HH: mm'));
+                $('#txtWorkingTimeTo').val(selectedTurn.end.format('DD/MM/YYYY HH: mm'));
+                if(selectedTurn.turnId == 0){
+                    $('btnSave').show();
+                    $('btnDelete').hide();
+                }else{
+                    $('btnSave').hide();
+                    $('btnDelete').show();
+                }   
+            }
         })
     </script>
 }

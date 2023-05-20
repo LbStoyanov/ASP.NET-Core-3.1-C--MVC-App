@@ -4,6 +4,11 @@ namespace Turns.Models
 {
     public partial class Patient
     {
+        public Patient()
+        {
+            this.Turns = new List<Turn>();
+        }
+        
         [Key]
         public int PatientId {get; set;}
 
