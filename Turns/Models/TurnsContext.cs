@@ -148,7 +148,7 @@ namespace Turns.Models
             .HasForeignKey(p => p.DoctorId);
 
             modelBuilder.Entity<Login>(entity => {
-                entity.ToTable("Login");
+                entity.ToTable("Logins");
                 entity.HasKey(l => l.LoginId);
                 entity.Property(l => l.Username)
                 .IsRequired();
@@ -158,7 +158,6 @@ namespace Turns.Models
             });
 
         }
-
  
     }
 }
