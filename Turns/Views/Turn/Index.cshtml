@@ -25,6 +25,7 @@
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="~/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/fullcalendar/locale/bg.js"><script/>
     <script>
         $(document).ready(function () {
             var workingTimeFrom = "";
@@ -33,11 +34,11 @@
 
             GetTurnsAndUpdateCalendar($('#DoctorId').val());
 
-            function GetTurnsAndUpdateCalendar (doctorId){
+            function GetTurnsAndUpdateCalendar(doctorId){
                 turns = [];
                 $.ajax({
                     type: 'GET',
-                    url: "Turn/GetTurns",
+                    url: "Turns/GetTurns",
                     data: { 'DoctorId': doctorId },
                     success: function (data) {
                         $.each(data, function (i, v){
@@ -60,50 +61,50 @@
             function GenerateCalendar (turns){
 
                 $.ajax({
-                type: "GET",
-                url: "Doctor/SetWorkingTimeFrom",
-                data: {"doctorId": $('#DoctorId').val() },
-                async: false,
-                success: function (result){
-                    workingTimeFrom = result;
-                },
-                error: function () {
-                    alert("Error: Selected doctor's working time from is not found! ");
-                }
-            });
+                    type: "GET",
+                    url: "Doctor/SetWorkingTimeFrom",
+                    data: {"doctorId": $('#DoctorId').val() },
+                    async: false,
+                    success: function (result){
+                       workingTimeFrom = result;
+                    },
+                    error: function () {
+                        alert("Error: Selected doctor's working time from is not found!");
+                    }
+                });
 
-            $.ajax({
-                type: "GET",
-                url: "Doctor/SetWorkingTimeTo",
-                data: {"doctorId": $('#DoctorId').val() },
-                async: false,
-                success: function (result){
-                    workingTimeTo = result;
-                },
-                error: function () {
-                    alert("Error: Selected doctor's working time to is not found! ");
-                }
-            });
+                $.ajax({
+                    type: "GET",
+                    url: "Doctor/SetWorkingTimeTo",
+                    data: {"doctorId": $('#DoctorId').val() },
+                    async: false,
+                    success: function (result){
+                        workingTimeTo = result;
+                    },
+                    error: function () {
+                        alert("Error: Selected doctor's working time to is not found! ");
+                    }
+                });
 
-            $('#HoursCalendar').fullCalendar('destroy');
+                $('#HoursCalendar').fullCalendar('destroy');
 
-            $('#HoursCalendar').fullCalendar({
-                contentHeight: 'auto',
-                defaultDate: new Date(),
-                slotLabelFormat: "HH:mm",
-                defaultView: 'agendaWeek',
-                header: {
-                    left: 'prev, next today',
-                    right: 'month,agendaWeek,agendaDay',
-                },
-                slotDuration: '00:30',
-                nowIndicator: true,
-                allDaySlot: false,
-                selectable: true,
-                eventLimit: true,
-                minTime: workingTimeFrom,
-                maxTime: workingTimeTo,
-            })
+                $('#HoursCalendar').fullCalendar({
+                    contentHeight: 'auto',
+                    defaultDate: new Date(),
+                    slotLabelFormat: "HH:mm",
+                    defaultView: 'agendaWeek',
+                    header: {
+                        left: 'prev, next today',
+                        right: 'month,agendaWeek,agendaDay',
+                    },
+                    slotDuration: '00:30',
+                    nowIndicator: true,
+                    allDaySlot: false,
+                    selectable: true,
+                    eventLimit: true,
+                    minTime: workingTimeFrom,
+                    maxTime: workingTimeTo,
+                })
             }
             
         })
