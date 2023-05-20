@@ -30,6 +30,11 @@
             </div>
         </form>
     </div>
+    <div class="modal-footer">
+        <a href="#" id="btnDelete" class="modal-close waves-effect waves-red btn-flat">Delete</a>
+        <a href="#" id="btnSave" class="modal-close waves-effect waves-green btn-flat">Save</a>
+        <a href="#" id="btnClose" class="modal-close waves-effect waves-grey btn-flat">Close</a>
+    </div>
 </div>
 
 <div id="HoursCalendar"></div>
@@ -42,9 +47,11 @@
     <script src="~/fullcalendar/locale/en-gb.js"></script>
     <script>
         $(document).ready(function (){
+            $('.modal').modal();
             let workingTimeFrom = '';
             let workingTimeTo = '';
             let turns = [];
+            let selectedTurn = [];
 
             GetTurnsAndUpdateCalendar($('#DoctorId').val());
 
@@ -122,10 +129,78 @@
                     minTime: workingTimeFrom,
                     maxTime: workingTimeTo,
                     events: turns,
+                    select: function(workingTimeFrom,workingTimeTo){
+                        selectedTurn = {
+                            turnId: 0,
+                            start: workingTimeFrom,
+                            end: workingTimeTo
+                        };
+                        OpenPopup();
+                    },
+                    eventClick: function(clickedTurn){
+                        selectedTurn = clickedTurn;
+                        OpenPopup();
+                    }
+                })
+            }
+            function OpenPopup(){
+                $('#txtWorkingTimeFrom').val(selectedTurn.start.format('DD/MM/YYYY HH:mm'));
+                $('#txtWorkingTimeTo').val(selectedTurn.end.format('DD/MM/YYYY HH:mm'));
+
+                if(selectedTurn.turnId == 0){
+                    $('#btnSave').show();
+                    $('#btnDelete').hide();
+                }else{
+                    $('#btnSave').hide();
+                    $('#btnDelete').show();
+                }
+                $('#ModalTurn').modal('open');
+            }
+            
+            $('#btnSave').click(function(){
+                let turnData = {
+                    PatientId: $('#PatientId').val(),
+                    DoctorId: $('#DoctorId').val(),
+                    workingTimeFrom: $('#txtWorkingTimeFrom').val(),
+                    workingTimeTo: $('#txtWorkingTimeTo').val(),
+                }
+
+                SaveTurn(turnData);
+            });
+
+            function SaveTurn(data){
+                $.ajax({
+                    type: 'POST',
+                    url: 'Turn/SaveTurn',
+                    data: {'turn': data},
+                    success: function(res){
+                        if(res.ok){
+                            GetTurnsAndUpdateCalendar($('#DoctorId').val());
+                        }
+                    },
+                    error: function(){
+                        alert('Something went wron when tried to save turn')
+                    }
                 })
             }
 
-            
+            $('btnDelete').click(function(){
+                if(confirm('Are you sure you want to delete this turn?')){
+                    $.ajax({
+                        type: 'POST',
+                    url: 'Turn/DeleteTurn',
+                    data: {'TurnId': selectedTurn.TurnId},
+                    success: function(res){
+                        if(res.ok){
+                            GetTurnsAndUpdateCalendar($('#DoctorId').val());
+                        }
+                    },
+                    error: function(){
+                        alert('Something went wron when tried to delete turn')
+                    }
+                    })
+                }
+            })
 
         })
     </script>

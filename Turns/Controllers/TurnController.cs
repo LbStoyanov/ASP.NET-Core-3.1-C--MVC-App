@@ -29,8 +29,17 @@ namespace Turns.Controllers
 
         public JsonResult GetTurns (int doctorId)
         {
-            List<Turn> turns = new List<Turn>();
-            turns = _context.Turns.Where(t => t.DoctorId == doctorId).ToList();
+        
+            var turns = _context.Turns.Where(t => t.DoctorId == doctorId)
+            .Select(t => new {
+                t.TurnId,
+                t.DoctorId,
+                t.PatientId,
+                t.DateTimeStart,
+                t.DateTimeEnd,
+                patient = t.Patient.FirstName + ", " + t.Patient.LastName
+            })
+            .ToList();
 
             return Json(turns);
         }
