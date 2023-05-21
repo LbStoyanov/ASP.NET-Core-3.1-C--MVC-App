@@ -60,5 +60,11 @@ namespace Turns.Controllers
                 return sb.ToString();
            }
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return View("Index");
+        }
     }
 }
