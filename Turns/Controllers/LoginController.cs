@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Turns.Models;
 
@@ -30,6 +31,7 @@ namespace Turns.Controllers
                 
                 if(userLogin != null)
                 {
+                    HttpContext.Session.SetString("username", userLogin.Username);
                     return RedirectToAction("Index", "Home");
                 }
                 else

@@ -3,6 +3,10 @@ using Turns.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromSeconds(300);
+    options.Cookie.HttpOnly = true;
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TurnsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TurnsContext")));
@@ -23,6 +27,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
