@@ -1,5 +1,14 @@
 @model Turns.Models.Login
 
+@{
+    Layout = null;
+}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link type="text/css" rel="stylesheet" href="~/css/materialize.min.css" media="screen,projection" />
+<script type="text/javascript" src="~/js/materialize.min.js"></script>
+
 <div class="container">
     <h4>Login</h4>
     <hr/>
@@ -14,6 +23,8 @@
                 <span asp-validation-for="Username"></span>
             </div>
         </div>
+        <span class="red-text">@ViewBag.errorLogin</span>
+        <br><br/>
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">vpn_key</i>
