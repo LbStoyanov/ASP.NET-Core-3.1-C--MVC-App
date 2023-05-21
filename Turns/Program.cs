@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Turns.Models;
 
@@ -8,7 +9,9 @@ builder.Services.AddSession(options => {
     options.Cookie.HttpOnly = true;
 });
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options => {
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
 builder.Services.AddDbContext<TurnsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TurnsContext")));
 
 var app = builder.Build();

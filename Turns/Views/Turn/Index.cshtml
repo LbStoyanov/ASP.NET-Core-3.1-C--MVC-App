@@ -1,4 +1,5 @@
 @model Turns.Models.Turn
+@Html.AntiForgeryToken();
 
 @{
     ViewBag.Title = "Assign hour";
@@ -180,6 +181,9 @@
                     type: 'POST',
                     url: 'Turn/SaveTurn',
                     data: {'turn': data},
+                    headers:{
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
                     success: function(res){
                         if(res.ok){
                             GetTurnsAndUpdateCalendar($('#DoctorId').val());
@@ -197,6 +201,9 @@
                         type: 'POST',
                     url: 'Turn/DeleteTurn',
                     data: {'TurnId': selectedTurn.TurnId},
+                    headers:{
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
                     success: function(res){
                         if(res.ok){
                             GetTurnsAndUpdateCalendar($('#DoctorId').val());
