@@ -13,6 +13,13 @@
     <h4>Login</h4>
     <hr/>
     <br/>
+
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+
     <form class="col s12" asp-action="Login">
         <div asp-validation-summary="ModelOnly"></div>
         <div class="row">
@@ -20,7 +27,7 @@
                 <i class="material-icons prefix">person_pin</i>
                 <input asp-for="Username" type="text">
                 <label asp-for="Username"></label>
-                <span asp-validation-for="Username"></span>
+                <span asp-validation-for="Username" class="field-validation-error"></span>
             </div>
         </div>
         <span class="red-text">@ViewBag.errorLogin</span>
@@ -30,7 +37,7 @@
                 <i class="material-icons prefix">vpn_key</i>
                 <input asp-for="Password" type="password">
                 <label asp-for="Password"></label>
-                <span asp-validation-for="Password"></span>
+                <span asp-validation-for="Password" class="field-validation-error"></span>
             </div>
         </div>
         <div class="row">

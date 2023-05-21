@@ -7,10 +7,10 @@ namespace Turns.Models
         [Key]
         public int LoginId { get; set; }
 
-        [Required(ErrorMessage = "You must enter an username")]
+        [Required(ErrorMessage = "You must enter a valid username")]
         public string Username { get; set; } = null!;
         
-        [Required(ErrorMessage = "You must enter a password")]
+        [Required(ErrorMessage = "You must enter a valid password")]
         public string Password {get; set;} = null!;
     }
 }
