@@ -88,6 +88,7 @@ namespace Turns.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SpecialityId,Description")] Speciality speciality)
         {
             if (ModelState.IsValid)

@@ -66,5 +66,10 @@ namespace Turns.Controllers
             HttpContext.Session.Clear();
             return View("Index");
         }
+
+        public IActionResult CreateAccount(Account account)
+        {
+            return View("CreateAccount");
+        }
     }
 }
