@@ -1,4 +1,4 @@
-namespace Turns.Models
+namespace Shifts.Models
 {
     public class DoctorSpecialities
     {

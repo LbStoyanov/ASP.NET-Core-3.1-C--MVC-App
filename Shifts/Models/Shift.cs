@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Turns.Models
+namespace Shifts.Models
 {
-    public class Turn
+    public class Shift
     {
         [Key]
         public int TurnId { get; set; }
@@ -10,7 +10,7 @@ namespace Turns.Models
         public int DoctorId { get; set; }
         [Display(Name = "Date Time Start")] //TODO:Turn start at
         public DateTime DateTimeStart { get; set; }
-        
+
         [Display(Name = "Date Time End")]
         public DateTime DateTimeEnd { get; set; }
         public Patient Patient { get; set; } = null!;

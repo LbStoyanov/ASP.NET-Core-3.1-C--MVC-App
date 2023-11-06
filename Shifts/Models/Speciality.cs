@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Turns.Models
+namespace Shifts.Models
 {
     public class Speciality
     {
@@ -11,12 +11,12 @@ namespace Turns.Models
 
         [Key]
         public int SpecialityId { get; set; }
-        
+
         //[StringLength(200)]
         [Display(Prompt = "Enter a speciality")]
         public string Description { get; set; } = null!;
 
-        public List<DoctorSpecialities> DoctorSpecialities { get; set; } 
+        public List<DoctorSpecialities> DoctorSpecialities { get; set; }
 
     }
 }
