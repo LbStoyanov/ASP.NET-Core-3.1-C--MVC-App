@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Turns.Models;
+using Shifts.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 });
-builder.Services.AddDbContext<TurnsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ShiftsContext")));
+builder.Services.AddDbContext<ShiftsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ShiftsContext")));
 
 var app = builder.Build();
 
