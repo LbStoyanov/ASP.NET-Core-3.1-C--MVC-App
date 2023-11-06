@@ -4,15 +4,17 @@ using Turns.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSession(options => {
+builder.Services.AddSession(options =>
+{
     options.IdleTimeout = TimeSpan.FromSeconds(300);
     options.Cookie.HttpOnly = true;
 });
 // Add services to the container.
-builder.Services.AddControllersWithViews(options => {
+builder.Services.AddControllersWithViews(options =>
+{
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 });
-builder.Services.AddDbContext<TurnsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TurnsContext")));
+builder.Services.AddDbContext<TurnsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ShiftsContext")));
 
 var app = builder.Build();
 
@@ -36,6 +38,6 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
-    
+
 
 app.Run();
