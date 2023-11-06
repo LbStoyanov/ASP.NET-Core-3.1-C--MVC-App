@@ -1,4 +1,4 @@
-@model Turns.Models.Speciality
+@model Shifts.Models.Speciality
 
 <!DOCTYPE html>
 
@@ -21,13 +21,15 @@
                     <div class="card-content white-text">
                         <span class="card-title">
                             <h5><b>@Html.DisplayFor(model => model.Description)</b></h5>
-                        </span>                      
+                        </span>
                     </div>
                     <div class="card-action blue-grey darken-2">
                         <form asp-action="Delete">
                             <input type="hidden" asp-for="SpecialityId" />
-                            <input type="submit" value="DELETE" class="waves-effect waves-light btn-small orange accent-4" />
-                            <a asp-action="Index" class="waves-effect waves-light btn-small orange accent-4 right black-text">Back</a>
+                            <input type="submit" value="DELETE"
+                                class="waves-effect waves-light btn-small orange accent-4" />
+                            <a asp-action="Index"
+                                class="waves-effect waves-light btn-small orange accent-4 right black-text">Back</a>
                         </form>
                     </div>
                 </div>
