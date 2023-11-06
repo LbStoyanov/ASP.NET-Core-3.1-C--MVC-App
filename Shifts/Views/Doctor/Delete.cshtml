@@ -1,4 +1,4 @@
-@model Turns.Models.Doctor
+@model Shifts.Models.Doctor
 
 
 <!DOCTYPE html>
@@ -25,20 +25,23 @@
                                     model.LastName)</b></h5>
                         </span>
                         <dt>
-                            <h6>@Html.DisplayNameFor(model => model.FirstName): @Html.DisplayFor(model => model.FirstName)</h6>
+                            <h6>@Html.DisplayNameFor(model => model.FirstName): @Html.DisplayFor(model =>
+                                model.FirstName)</h6>
                         </dt>
                         <hr />
                         <dt>
-                            <h6>@Html.DisplayNameFor(model => model.LastName): @Html.DisplayFor(model => model.LastName)</h6>
+                            <h6>@Html.DisplayNameFor(model => model.LastName): @Html.DisplayFor(model => model.LastName)
+                            </h6>
                         </dt>
                         <hr />
                         <dt>
-                            <h6>@Html.DisplayNameFor(model => model.Address): @Html.DisplayFor(model => model.Address)</h6>
+                            <h6>@Html.DisplayNameFor(model => model.Address): @Html.DisplayFor(model => model.Address)
+                            </h6>
                         </dt>
                         <hr />
                         <dt>
                             <h6>@Html.DisplayNameFor(model => model.PhoneNumber): @Html.DisplayFor(model =>
-                            model.PhoneNumber)</h6>
+                                model.PhoneNumber)</h6>
                         </dt>
                         <hr />
                         <dt>
@@ -47,20 +50,22 @@
                         <hr />
                         <dt>
                             <h6>@Html.DisplayNameFor(model => model.WorkingHoursFrom): @Html.DisplayFor(model =>
-                            model.WorkingHoursFrom)</h6>
+                                model.WorkingHoursFrom)</h6>
                         </dt>
                         <hr />
                         <dt>
-                          <h6>@Html.DisplayNameFor(model => model.WorkingHoursTo): @Html.DisplayFor(model =>
-                            model.WorkingHoursTo)</h6>
+                            <h6>@Html.DisplayNameFor(model => model.WorkingHoursTo): @Html.DisplayFor(model =>
+                                model.WorkingHoursTo)</h6>
                         </dt>
 
                     </div>
                     <div class="card-action blue-grey darken-2">
                         <form asp-action="Delete">
                             <input type="hidden" asp-for="DoctorId" />
-                            <input type="submit" value="DELETE" class="waves-effect waves-light btn-small orange accent-4" />
-                            <a asp-action="Index" class="waves-effect waves-light btn-small orange accent-4 right black-text">Back</a>
+                            <input type="submit" value="DELETE"
+                                class="waves-effect waves-light btn-small orange accent-4" />
+                            <a asp-action="Index"
+                                class="waves-effect waves-light btn-small orange accent-4 right black-text">Back</a>
                         </form>
                     </div>
                 </div>

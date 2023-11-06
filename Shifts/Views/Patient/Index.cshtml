@@ -1,7 +1,8 @@
-@model IEnumerable<Turns.Models.Patient>
+@model IEnumerable<Shifts.Models.Patient>
 
 <p>
-    <a asp-action="Create" class="btn-floating btn-large deep-purple accent-4"><i class="material-icons">person_add_alt</i></a>
+    <a asp-action="Create" class="btn-floating btn-large deep-purple accent-4"><i
+            class="material-icons">person_add_alt</i></a>
 </p>
 
 <table class="responsive-table highlight z-depth-3 blue lighten-5">
@@ -10,22 +11,22 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
-             <th>
+            <th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
-             <th>
+            <th>
                 @Html.DisplayNameFor(model => model.Direction)
             </th>
-             <th>
+            <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
-             <th>
+            <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>        
+    <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -46,8 +47,10 @@
                 </td>
                 <td style="text-align: right;">
                     <a asp-action="Edit" asp-route-id="@item.PatientId"><i class="material-icons">edit</i></a>
-                    <a asp-action="Details" asp-route-id="@item.PatientId"><i class="material-icons grey-text">more_vert</i></a>
-                    <a asp-action="Delete" asp-route-id="@item.PatientId"><i class="material-icons red-text">delete_forever</i></a>
+                    <a asp-action="Details" asp-route-id="@item.PatientId"><i
+                            class="material-icons grey-text">more_vert</i></a>
+                    <a asp-action="Delete" asp-route-id="@item.PatientId"><i
+                            class="material-icons red-text">delete_forever</i></a>
                 </td>
             </tr>
         }
