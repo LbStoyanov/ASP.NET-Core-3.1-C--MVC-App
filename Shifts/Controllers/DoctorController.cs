@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Turns.Models;
+using Shifts.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Turns.Controllers
+namespace Shifts.Controllers
 {
     public class DoctorController : Controller
     {
-        private readonly TurnsContext _context;
+        private readonly ShiftsContext _context;
 
-        public DoctorController(TurnsContext context)
+        public DoctorController(ShiftsContext context)
         {
             this._context = context;
         }
@@ -119,7 +119,7 @@ namespace Turns.Controllers
                     .FirstOrDefaultAsync(ds => ds.DoctorId == id);
 
                     this._context.Remove(doctorSpeciality!);
-                     await this._context.SaveChangesAsync();
+                    await this._context.SaveChangesAsync();
 
                     doctorSpeciality!.SpecialityId = SpecialityId;
 
@@ -184,14 +184,14 @@ namespace Turns.Controllers
             return _context.Doctors.Any(e => e.DoctorId == id);
         }
 
-        public string SetWorkingTimeFrom (int doctorId)
+        public string SetWorkingTimeFrom(int doctorId)
         {
             var WorkingHoursFrom = _context.Doctors.Where(m => m.DoctorId == doctorId).FirstOrDefault()!.WorkingHoursFrom;
 
             return WorkingHoursFrom.Hour + ":" + WorkingHoursFrom.Minute;
         }
 
-         public string SetWorkingTimeTo (int doctorId)
+        public string SetWorkingTimeTo(int doctorId)
         {
             var WorkingHoursTo = _context.Doctors.Where(m => m.DoctorId == doctorId).FirstOrDefault()!.WorkingHoursTo;
 

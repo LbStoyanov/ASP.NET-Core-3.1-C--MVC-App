@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Turns.Models;
+using Shifts.Models;
 
-namespace Turns.Controllers;
+namespace Shifts.Controllers;
 
 public class HomeController : Controller
 {

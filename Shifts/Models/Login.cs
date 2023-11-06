@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Turns.Models
+namespace Shifts.Models
 {
     public class Login
     {
@@ -9,8 +9,8 @@ namespace Turns.Models
 
         [Required(ErrorMessage = "You must enter a valid username")]
         public string Username { get; set; } = null!;
-        
+
         [Required(ErrorMessage = "You must enter a valid password")]
-        public string Password {get; set;} = null!;
+        public string Password { get; set; } = null!;
     }
 }

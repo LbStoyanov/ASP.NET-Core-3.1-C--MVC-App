@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Turns.Models;
+using Shifts.Models;
 
-namespace Turns.Controllers
+namespace Shifts.Controllers
 {
     public class PatientController : Controller
     {
-        private readonly TurnsContext _context;
+        private readonly ShiftsContext _context;
 
-        public PatientController(TurnsContext context)
+        public PatientController(ShiftsContext context)
         {
             this._context = context;
         }
@@ -117,7 +117,7 @@ namespace Turns.Controllers
             }
 
             var patient = await this._context.Patients.FindAsync(id);
-            
+
 
             if (patient == null)
             {

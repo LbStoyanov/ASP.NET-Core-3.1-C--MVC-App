@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Turns.Models;
+using Shifts.Models;
 
-namespace Turns.Controllers
+namespace Shifts.Controllers
 {
     public class SpecialityController : Controller
     {
-        private readonly TurnsContext _context;
-        public SpecialityController(TurnsContext context)
+        private readonly ShiftsContext _context;
+        public SpecialityController(ShiftsContext context)
         {
 
             this._context = context;
@@ -100,6 +100,6 @@ namespace Turns.Controllers
             return View(speciality);
         }
 
-        
+
     }
 }

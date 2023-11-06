@@ -5,7 +5,7 @@ namespace Shifts.Models
     public class Shift
     {
         [Key]
-        public int TurnId { get; set; }
+        public int ShiftId { get; set; }
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
         [Display(Name = "Date Time Start")] //TODO:Turn start at

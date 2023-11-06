@@ -7,7 +7,7 @@ namespace Shifts.Models
         public Doctor()
         {
             this.DoctorSpecialities = new List<DoctorSpecialities>();
-            this.Turns = new List<Shift>();
+            this.Shifts = new List<Shift>();
         }
 
         [Key]
@@ -44,6 +44,6 @@ namespace Shifts.Models
 
         public List<DoctorSpecialities> DoctorSpecialities { get; set; }
 
-        public List<Shift> Turns { get; set; }
+        public List<Shift> Shifts { get; set; }
     }
 }

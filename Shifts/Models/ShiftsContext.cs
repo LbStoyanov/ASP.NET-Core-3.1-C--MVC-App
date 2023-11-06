@@ -1,29 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Turns.Models
+namespace Shifts.Models
 {
-    public class TurnsContext : DbContext
+    public class ShiftsContext : DbContext
     {
-        public TurnsContext(DbContextOptions<TurnsContext> options) 
-            :base(options)
+        public ShiftsContext(DbContextOptions<ShiftsContext> options)
+            : base(options)
         {
-            
+
         }
 
-        public DbSet<Speciality> Specialities{ get; set;} = null!;
+        public DbSet<Speciality> Specialities { get; set; } = null!;
 
-        public DbSet<Patient> Patients {get; set;} = null!;
+        public DbSet<Patient> Patients { get; set; } = null!;
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
-        
+
         public DbSet<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
-        public DbSet<Turn> Turns { get; set; } = null!;
+        public DbSet<Shift> Shifts { get; set; } = null!;
 
         public DbSet<Login> Logins { get; set; } = null!;
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Speciality>(entity => 
+            modelBuilder.Entity<Speciality>(entity =>
             {
                 entity.ToTable("Specialities");
 
@@ -68,7 +68,8 @@ namespace Turns.Models
                 .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Doctor>(entity => {
+            modelBuilder.Entity<Doctor>(entity =>
+            {
                 entity.ToTable("Doctors");
 
                 entity.HasKey(d => d.DoctorId);
@@ -106,8 +107,8 @@ namespace Turns.Models
                 .IsRequired()
                 .IsUnicode(false);
             });
-            
-            modelBuilder.Entity<DoctorSpecialities>().HasKey(x => new {x.DoctorId,x.SpecialityId});
+
+            modelBuilder.Entity<DoctorSpecialities>().HasKey(x => new { x.DoctorId, x.SpecialityId });
 
             modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Doctor)
             .WithMany(p => p.DoctorSpecialities)
@@ -115,12 +116,13 @@ namespace Turns.Models
 
             modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Speciality)
             .WithMany(p => p.DoctorSpecialities)
-            .HasForeignKey(p => p.SpecialityId); 
+            .HasForeignKey(p => p.SpecialityId);
 
-            modelBuilder.Entity<Turn>(entity => {
+            modelBuilder.Entity<Shift>(entity =>
+            {
                 entity.ToTable("Turns");
 
-                entity.HasKey(d => d.TurnId);
+                entity.HasKey(d => d.ShiftId);
 
                 entity.Property(d => d.PatientId)
                 .IsRequired()
@@ -137,17 +139,18 @@ namespace Turns.Models
                 entity.Property(d => d.DateTimeEnd)
                 .IsRequired()
                 .IsUnicode(false);
-            }); 
-            
-             modelBuilder.Entity<Turn>().HasOne(x => x.Patient)
-            .WithMany(p => p.Turns)
-            .HasForeignKey(p => p.PatientId);
+            });
 
-             modelBuilder.Entity<Turn>().HasOne(x => x.Doctor)
-            .WithMany(p => p.Turns)
-            .HasForeignKey(p => p.DoctorId);
+            modelBuilder.Entity<Shift>().HasOne(x => x.Patient)
+           .WithMany(p => p.Shifts)
+           .HasForeignKey(p => p.PatientId);
 
-            modelBuilder.Entity<Login>(entity => {
+            modelBuilder.Entity<Shift>().HasOne(x => x.Doctor)
+           .WithMany(p => p.Shifts)
+           .HasForeignKey(p => p.DoctorId);
+
+            modelBuilder.Entity<Login>(entity =>
+            {
                 entity.ToTable("Logins");
                 entity.HasKey(l => l.LoginId);
                 entity.Property(l => l.Username)
@@ -158,6 +161,6 @@ namespace Turns.Models
             });
 
         }
- 
+
     }
 }

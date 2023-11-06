@@ -6,7 +6,7 @@ namespace Shifts.Models
     {
         public Patient()
         {
-            this.Turns = new List<Shift>();
+            this.Shifts = new List<Shift>();
         }
 
         [Key]
@@ -31,7 +31,7 @@ namespace Shifts.Models
         [EmailAddress(ErrorMessage = "This is not a valid email address")]
         public string Email { get; set; } = null!;
 
-        public List<Shift> Turns { get; set; } = null!;
+        public List<Shift> Shifts { get; set; } = null!;
 
     }
 }

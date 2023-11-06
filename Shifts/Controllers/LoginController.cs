@@ -2,15 +2,15 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Turns.Models;
+using Shifts.Models;
 
-namespace Turns.Controllers
+namespace Shifts.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly TurnsContext _context;
+        private readonly ShiftsContext _context;
 
-        public LoginController(TurnsContext context)
+        public LoginController(ShiftsContext context)
         {
             this._context = context;
         }
@@ -22,14 +22,14 @@ namespace Turns.Controllers
 
         public IActionResult Login(Login login)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 string encryptedPassword = Encrypt(login.Password);
 
-                var userLogin = _context.Logins.Where(l => l.Username  == login.Username && l.Password == encryptedPassword)
+                var userLogin = _context.Logins.Where(l => l.Username == login.Username && l.Password == encryptedPassword)
                 .FirstOrDefault();
-                
-                if(userLogin != null)
+
+                if (userLogin != null)
                 {
                     HttpContext.Session.SetString("username", userLogin.Username);
                     return RedirectToAction("Index", "Home");
@@ -47,8 +47,8 @@ namespace Turns.Controllers
 
         public string Encrypt(string password)
         {
-           using(SHA256 sha256Hash = SHA256.Create())
-           {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
 
                 StringBuilder sb = new StringBuilder();
@@ -58,7 +58,7 @@ namespace Turns.Controllers
                     sb.Append(bytes[i].ToString("x2"));
                 }
                 return sb.ToString();
-           }
+            }
         }
 
         public IActionResult Logout()
