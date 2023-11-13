@@ -1,7 +1,7 @@
 @model IEnumerable<Shifts.Models.Patient>
 
 <p>
-    <a asp-action="Create" class="btn-floating btn-large deep-purple accent-4">Create<i
+    <a asp-action="Create" class="btn-floating btn-large deep-purple accent-4">New<i
             class="material-icons">person_add_alt</i></a>
 </p>
 
@@ -46,10 +46,10 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td style="text-align: right;">
-                    <a asp-action="Edit" asp-route-id="@item.PatientId"><i class="material-icons">edit</i></a>
-                    <a asp-action="Details" asp-route-id="@item.PatientId"><i
+                    <a asp-action="Edit" asp-route-id="@item.PatientId"><i class="material-icons">Edit</i></a>
+                    <a asp-action="Details" asp-route-id="@item.PatientId">Details<i
                             class="material-icons grey-text">more_vert</i></a>
-                    <a asp-action="Delete" asp-route-id="@item.PatientId"><i
+                    <a asp-action="Delete" asp-route-id="@item.PatientId">Delete<i
                             class="material-icons red-text">delete_forever</i></a>
                 </td>
             </tr>
