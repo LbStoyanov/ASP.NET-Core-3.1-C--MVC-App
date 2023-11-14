@@ -59,9 +59,11 @@ namespace Shifts.Controllers
                 this._context.Add(doctor);
                 await this._context.SaveChangesAsync();
 
-                var doctorSpeciality = new DoctorSpecialities();
-                doctorSpeciality.DoctorId = doctor.DoctorId;
-                doctorSpeciality.SpecialityId = SpecialityId;
+                var doctorSpeciality = new DoctorSpecialities
+                {
+                    DoctorId = doctor.DoctorId,
+                    SpecialityId = SpecialityId
+                };
                 this._context.Add(doctorSpeciality);
 
                 await this._context.SaveChangesAsync();
