@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Turns/Turns.csproj",
+                "${workspaceFolder}/Shifts/Shifts.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Turns/Turns.csproj",
+                "${workspaceFolder}/Shifts/Shifts.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Turns/Turns.csproj"
+                "${workspaceFolder}/Shifts/Shifts.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

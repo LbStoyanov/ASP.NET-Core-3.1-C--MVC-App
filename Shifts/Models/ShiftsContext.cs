@@ -120,7 +120,7 @@ namespace Shifts.Models
 
             modelBuilder.Entity<Shift>(entity =>
             {
-                entity.ToTable("Turns");
+                entity.ToTable("Shifts");
 
                 entity.HasKey(d => d.ShiftId);
 

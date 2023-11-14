@@ -182,7 +182,7 @@ namespace Shifts.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Turns", (string)null);
+                    b.ToTable("Shifts", (string)null);
                 });
 
             modelBuilder.Entity("Shifts.Models.Speciality", b =>

@@ -73,7 +73,7 @@ namespace Shifts.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Turns",
+                name: "Shifts",
                 columns: table => new
                 {
                     ShiftId = table.Column<int>(type: "int", nullable: false)
@@ -85,15 +85,15 @@ namespace Shifts.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Turns", x => x.ShiftId);
+                    table.PrimaryKey("PK_Shifts", x => x.ShiftId);
                     table.ForeignKey(
-                        name: "FK_Turns_Doctors_DoctorId",
+                        name: "FK_Shifts_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "DoctorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Turns_Patients_PatientId",
+                        name: "FK_Shifts_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "PatientId",
@@ -130,13 +130,13 @@ namespace Shifts.Migrations
                 column: "SpecialityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turns_DoctorId",
-                table: "Turns",
+                name: "IX_Shifts_DoctorId",
+                table: "Shifts",
                 column: "DoctorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turns_PatientId",
-                table: "Turns",
+                name: "IX_Shifts_PatientId",
+                table: "Shifts",
                 column: "PatientId");
         }
 
@@ -149,7 +149,7 @@ namespace Shifts.Migrations
                 name: "Logins");
 
             migrationBuilder.DropTable(
-                name: "Turns");
+                name: "Shifts");
 
             migrationBuilder.DropTable(
                 name: "Specialities");
