@@ -2,4 +2,5 @@
 //TODO:Create Patient View and Speciality View
 //TODO:Adjust working hours format
 //TODO:Create VueJs FrontEnd for the project
+//TODO:Check for different card types
 //In the doctor card change the color of the email, because it is not visible!!!!
