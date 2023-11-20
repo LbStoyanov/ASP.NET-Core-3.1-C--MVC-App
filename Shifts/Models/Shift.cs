@@ -8,12 +8,15 @@ namespace Shifts.Models
         public int ShiftId { get; set; }
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
-        [Display(Name = "Date Time Start")] //TODO:Turn start at
+
+        [Display(Name = "Shift start at")]
         public DateTime DateTimeStart { get; set; }
 
-        [Display(Name = "Date Time End")]
+        [Display(Name = "Shift end at")]
         public DateTime DateTimeEnd { get; set; }
+
         public Patient Patient { get; set; } = null!;
+
         public Doctor Doctor { get; set; } = null!;
     }
 }
