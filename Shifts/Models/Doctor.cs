@@ -21,7 +21,8 @@ namespace Shifts.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = null!;
 
-        [Required(ErrorMessage = "You should enter your direction")]
+        [Required(ErrorMessage = "You should enter your address")]
+        [Display(Name = "Address")]
         public string Address { get; set; } = null!;
 
         [Required(ErrorMessage = "You should enter your phone number")]
