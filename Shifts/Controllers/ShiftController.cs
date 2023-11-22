@@ -19,10 +19,10 @@ namespace Shifts.Controllers
         public IActionResult Index()
         {
             ViewData["DoctorId"] =
-            new SelectList((from doctor in _context.Doctors.ToList() select new { DoctorId = doctor.DoctorId, FullName = doctor.FirstName + " " + doctor.LastName }), "DoctorId", "FullName");
+            new SelectList(from doctor in _context.Doctors.ToList() select new { doctor.DoctorId, FullName = doctor.FirstName + " " + doctor.LastName }, "DoctorId", "FullName");
 
             ViewData["PatientId"] =
-            new SelectList((from patient in _context.Patients.ToList() select new { PatientId = patient.PatientId, FullName = patient.FirstName + " " + patient.LastName }), "PatientId", "FullName");
+            new SelectList(from patient in _context.Patients.ToList() select new { patient.PatientId, FullName = patient.FirstName + " " + patient.LastName }, "PatientId", "FullName");
 
             return View();
         }
@@ -61,7 +61,7 @@ namespace Shifts.Controllers
                 Console.WriteLine($"{ex} Exception found!");
             }
 
-            var jsonResult = new { ok = ok };
+            var jsonResult = new { ok };
 
             return Json(jsonResult);
         }

@@ -69,6 +69,8 @@ namespace Shifts.Controllers
 
         public IActionResult CreateAccount(Account account)
         {
+
+            //TODO:Should save the encrypted password
             return View("CreateAccount");
         }
     }
