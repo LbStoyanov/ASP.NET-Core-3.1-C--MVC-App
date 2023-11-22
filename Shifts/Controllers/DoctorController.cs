@@ -188,6 +188,8 @@ namespace Shifts.Controllers
 
         public string SetWorkingTimeFrom(int doctorId)
         {
+
+            //TODO: Validate the case if the doctorId is null!!!!!
             var WorkingHoursFrom = _context.Doctors.Where(m => m.DoctorId == doctorId).FirstOrDefault()!.WorkingHoursFrom;
 
             return WorkingHoursFrom.Hour + ":" + WorkingHoursFrom.Minute;
