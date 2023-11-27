@@ -52,9 +52,39 @@
     <script src="~/fullcalendar/locale/en-gb.js"></script>
     <script>
         $(document).ready(function () {
+            var shifStart = "";
+            var shiftEnd = "";
+
+            $.ajax({
+                type: "GET",
+                url: "Doctor/SetWorkingTimeFrom",
+                data: { "doctorId": $('#DoctorId').val() },
+                async: false,
+                success: function (result) {
+                    shifStart = result;
+                },
+                error: function () {
+                    alert("Something went wrong when tried to load shift start!");
+                }
+            });
 
             $('#ShiftsCalendar').fullCalendar({
-
+                contentHeight: 'auto',
+                defaultDate: new Date(),
+                slotLabelFormat: "HH:mm",
+                defaultView: 'agendaWeek',
+                header: {
+                    left: 'prev, next today',
+                    //center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                slotDuration: '00:30',
+                nowIndicator: true,
+                allDaySlot: false,
+                selectable: true,
+                eventLimit: true,
+                minTime: shifStart,
+                maxTime: shiftEnd,
             })
 
         })
