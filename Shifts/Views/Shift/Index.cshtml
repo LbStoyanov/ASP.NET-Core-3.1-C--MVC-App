@@ -54,52 +54,78 @@
         $(document).ready(function () {
             var shifStart = "";
             var shiftEnd = "";
+            var shifts = [];
 
-            $.ajax({
-                type: "GET",
-                url: "Doctor/SetWorkingTimeFrom",
-                data: { "doctorId": $('#DoctorId').val() },
-                async: false,
-                success: function (result) {
-                    shifStart = result;
-                },
-                error: function () {
-                    alert("Something went wrong when tried to load shift start!");
-                }
-            });
+            function GetShiftsAndUpdate(doctorId) {
+                shifts = [];
+                $.ajax({
+                    type: "GET",
+                    url: "Shifts/GetShifts",
+                    data: {
+                        'doctorId': doctorId,
+                        success: function (data) {
+                            $.each(data, function (i, v) {
+                                shifts.push({
+                                    shiftId: v.shiftId,
+                                    patientId: v.patientId,
+                                    doctorId: v.doctorId,
+                                    start: moment(v.)///----------
+                                })
+                            })
+                        }
+                    }
+                })
+            }
 
-            $.ajax({
-                type: "GET",
-                url: "Doctor/SetWorkingTimeTo",
-                data: { "doctorId": $('#DoctorId').val() },
-                async: false,
-                success: function (result) {
-                    shiftEnd = result;
-                },
-                error: function () {
-                    alert("Something went wrong when tried to load shift end!");
-                }
-            });
+            function GenerateCalendar(shifts) {
 
-            $('#ShiftsCalendar').fullCalendar({
-                contentHeight: 'auto',
-                defaultDate: new Date(),
-                slotLabelFormat: "HH:mm",
-                defaultView: 'agendaWeek',
-                header: {
-                    left: 'prev, next today',
-                    //center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                slotDuration: '00:30',
-                nowIndicator: true,
-                allDaySlot: false,
-                selectable: true,
-                eventLimit: true,
-                minTime: shifStart,
-                maxTime: shiftEnd,
-            })
+                $.ajax({
+                    type: "GET",
+                    url: "Doctor/SetWorkingTimeFrom",
+                    data: { "doctorId": $('#DoctorId').val() },
+                    async: false,
+                    success: function (result) {
+                        shifStart = result;
+                    },
+                    error: function () {
+                        alert("Something went wrong when tried to load shift start!");
+                    }
+                });
 
+                $.ajax({
+                    type: "GET",
+                    url: "Doctor/SetWorkingTimeTo",
+                    data: { "doctorId": $('#DoctorId').val() },
+                    async: false,
+                    success: function (result) {
+                        shiftEnd = result;
+                    },
+                    error: function () {
+                        alert("Something went wrong when tried to load shift end!");
+                    }
+                });
+
+                $('#ShiftsCalendar').fullCalendar('destroy');
+
+                $('#ShiftsCalendar').fullCalendar({
+                    contentHeight: 'auto',
+                    defaultDate: new Date(),
+                    slotLabelFormat: "HH:mm",
+                    defaultView: 'agendaWeek',
+                    header: {
+                        left: 'prev, next today',
+                        //center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    slotDuration: '00:30',
+                    nowIndicator: true,
+                    allDaySlot: false,
+                    selectable: true,
+                    eventLimit: true,
+                    minTime: shifStart,
+                    maxTime: shiftEnd,
+                });
+            };
         })
     </script>
 }
