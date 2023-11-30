@@ -68,6 +68,19 @@
                 }
             });
 
+            $.ajax({
+                type: "GET",
+                url: "Doctor/SetWorkingTimeTo",
+                data: { "doctorId": $('#DoctorId').val() },
+                async: false,
+                success: function (result) {
+                    shiftEnd = result;
+                },
+                error: function () {
+                    alert("Something went wrong when tried to load shift end!");
+                }
+            });
+
             $('#ShiftsCalendar').fullCalendar({
                 contentHeight: 'auto',
                 defaultDate: new Date(),
