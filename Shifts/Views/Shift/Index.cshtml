@@ -56,30 +56,35 @@
             var shiftEnd = "";
             var shifts = [];
 
+            GetShiftsAndUpdate($('#DoctorId').val());
+
             function GetShiftsAndUpdate(doctorId) {
                 shifts = [];
                 $.ajax({
                     type: "GET",
-                    url: "Shifts/GetShifts",
+                    url: "Shift/GetShifts",
                     data: {
-                        'doctorId': doctorId,
-                        success: function (data) {
-                            $.each(data, function (i, v) {
-                                shifts.push({
-                                    shiftId: v.shiftId,
-                                    patientId: v.patientId,
-                                    doctorId: v.doctorId,
-                                    start: moment(v.dateTimeStart),
-                                    end: v.dateTimeEnd != null ? moment(v.dateTimeEnd) : null,
-                                })
-                            })
-                        }
+                        'DoctorId': doctorId
+                    },
+                    success: function (data) {
+                        $.each(data, function (i, v) {
+                            shifts.push({
+                                shiftId: v.shiftId,
+                                patientId: v.patientId,
+                                doctorId: v.doctorId,
+                                start: moment(v.dateTimeStart),
+                                end: v.dateTimeEnd != null ? moment(v.dateTimeEnd) : null,
+                            });
+                        })
+                        GenerateCalendar(shifts);
+                    },
+                    error: function () {
+                        alert('Something went wrong! Cannot get shifts!');
                     }
                 })
             }
 
             function GenerateCalendar(shifts) {
-
                 $.ajax({
                     type: "GET",
                     url: "Doctor/SetWorkingTimeFrom",
@@ -125,8 +130,11 @@
                     eventLimit: true,
                     minTime: shifStart,
                     maxTime: shiftEnd,
+                    events: shifts,
                 });
-            };
-        })
+            }
+
+        }
+
     </script>
 }
