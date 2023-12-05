@@ -69,7 +69,8 @@
                                     shiftId: v.shiftId,
                                     patientId: v.patientId,
                                     doctorId: v.doctorId,
-                                    start: moment(v.)///----------
+                                    start: moment(v.dateTimeStart),
+                                    end: v.dateTimeEnd != null ? moment(v.dateTimeEnd) : null,
                                 })
                             })
                         }

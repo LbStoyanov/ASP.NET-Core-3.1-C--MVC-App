@@ -30,15 +30,15 @@ namespace Shifts.Controllers
         public JsonResult GetShifts(int doctorId)
         {
 
-            var shifts = _context.Shifts.Where(t => t.DoctorId == doctorId)
-            .Select(t => new
+            var shifts = _context.Shifts.Where(sh => sh.DoctorId == doctorId)
+            .Select(sh => new
             {
-                t.ShiftId,
-                t.DoctorId,
-                t.PatientId,
-                t.DateTimeStart,
-                t.DateTimeEnd,
-                patient = t.Patient.FirstName + ", " + t.Patient.LastName
+                sh.ShiftId,
+                sh.DoctorId,
+                sh.PatientId,
+                sh.DateTimeStart,
+                sh.DateTimeEnd,
+                patient = sh.Patient.FirstName + ", " + sh.Patient.LastName
             })
             .ToList();
 
