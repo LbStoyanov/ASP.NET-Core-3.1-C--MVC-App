@@ -1,5 +1,5 @@
 @model Shifts.Models.Shift
-@Html.AntiForgeryToken();
+@Html.AntiForgeryToken()
 
 @{
     ViewBag.Title = "Assign Shifts";
@@ -15,32 +15,6 @@
         <select asp-for="PatientId" asp-items="ViewBag.PatientId"></select>
     </div>
 </div>
-<br>
-
-<div id="ModalShift" class="modal">
-    <div class="modal-content">
-        <h4>Shift</h4>
-        <form>
-            <div>
-                <label>Start</label>
-                <input type="text" id="txtWorkingTimeFrom" readonly="readonly" />
-            </div>
-            <div>
-                <label>End</label>
-                <input type="text" id="txtWorkingTimeTo" readonly="readonly" />
-            </div>
-            <div>
-                <label>Patient</label>
-                <input type="text" id="txtPatient" readonly="readonly" />
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a href="#" id="btnDelete" class="modal-close waves-effect waves-red btn-flat">Delete</a>
-        <a href="#" id="btnSave" class="modal-close waves-effect waves-green btn-flat">Save</a>
-        <a href="#" id="btnClose" class="modal-close waves-effect waves-grey btn-flat">Close</a>
-    </div>
-</div>
 
 <div id="ShiftsCalendar"></div>
 
@@ -52,88 +26,25 @@
     <script src="~/fullcalendar/locale/en-gb.js"></script>
     <script>
         $(document).ready(function () {
-            var shifStart = "";
-            var shiftEnd = "";
-            var shifts = [];
 
-            GetShiftsAndUpdate($('#DoctorId').val());
 
-            function GetShiftsAndUpdate(doctorId) {
-                shifts = [];
-                $.ajax({
-                    type: "GET",
-                    url: "Shift/GetShifts",
-                    data: {
-                        'DoctorId': doctorId
-                    },
-                    success: function (data) {
-                        $.each(data, function (i, v) {
-                            shifts.push({
-                                shiftId: v.shiftId,
-                                patientId: v.patientId,
-                                doctorId: v.doctorId,
-                                start: moment(v.dateTimeStart),
-                                end: v.dateTimeEnd != null ? moment(v.dateTimeEnd) : null,
-                            });
-                        })
-                        GenerateCalendar(shifts);
-                    },
-                    error: function () {
-                        alert('Something went wrong! Cannot get shifts!');
-                    }
-                })
-            }
+            $('#ShiftsCalendar').fullCalendar({
+                contentHeight: 'auto',
+                defaultDate: new Date(),
+                slotLabelFormat: "HH:mm",
+                defaultView: 'agendaWeek',
+                header: {
+                    left: 'prev, next today',
+                    //center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                slotDuration: '00:30',
+                nowIndicator: true,
+                allDaySlot: false,
+                selectable: true,
+                eventLimit: true,
 
-            function GenerateCalendar(shifts) {
-                $.ajax({
-                    type: "GET",
-                    url: "Doctor/SetWorkingTimeFrom",
-                    data: { "doctorId": $('#DoctorId').val() },
-                    async: false,
-                    success: function (result) {
-                        shifStart = result;
-                    },
-                    error: function () {
-                        alert("Something went wrong when tried to load shift start!");
-                    }
-                });
-
-                $.ajax({
-                    type: "GET",
-                    url: "Doctor/SetWorkingTimeTo",
-                    data: { "doctorId": $('#DoctorId').val() },
-                    async: false,
-                    success: function (result) {
-                        shiftEnd = result;
-                    },
-                    error: function () {
-                        alert("Something went wrong when tried to load shift end!");
-                    }
-                });
-
-                $('#ShiftsCalendar').fullCalendar('destroy');
-
-                $('#ShiftsCalendar').fullCalendar({
-                    contentHeight: 'auto',
-                    defaultDate: new Date(),
-                    slotLabelFormat: "HH:mm",
-                    defaultView: 'agendaWeek',
-                    header: {
-                        left: 'prev, next today',
-                        //center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-                    slotDuration: '00:30',
-                    nowIndicator: true,
-                    allDaySlot: false,
-                    selectable: true,
-                    eventLimit: true,
-                    minTime: shifStart,
-                    maxTime: shiftEnd,
-                    events: shifts,
-                });
-            }
-
+            });
         }
 
     </script>
