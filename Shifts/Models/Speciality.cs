@@ -10,6 +10,7 @@ namespace Shifts.Models
         }
 
         [Key]
+        [Required(ErrorMessage = "A specialty is required. If the list is empty, first create a specialty for this doctor!")]
         public int SpecialityId { get; set; }
 
         //[StringLength(200,ErrorMessage = "The field should have maximum 200 characters")]

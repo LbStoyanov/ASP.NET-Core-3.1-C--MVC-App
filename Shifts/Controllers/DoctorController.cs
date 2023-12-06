@@ -48,8 +48,6 @@ namespace Shifts.Controllers
         }
 
         // POST: Doctor/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DoctorId,FirstName,LastName,Address,PhoneNumber,Email,WorkingHoursFrom,WorkingHoursTo")] Doctor doctor, int SpecialityId)
@@ -58,6 +56,8 @@ namespace Shifts.Controllers
             {
                 this._context.Add(doctor);
                 await this._context.SaveChangesAsync();
+                //IF SPECIALTY ID IS NULL FIRST MUST BE CREATED A SPECIALITY FOR THIS DOCTOR!!!
+                
 
                 var doctorSpeciality = new DoctorSpecialities
                 {
