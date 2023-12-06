@@ -4,3 +4,4 @@
 //TODO:Create VueJs FrontEnd for the project
 //TODO:Check for different card types
 //In the doctor card change the color of the email, because it is not visible!!!!
+//CANNOT SIMPLY DELETE SPECIALITY, SHOULD CHECK IF A DOCTOR HAS ASSIGNED TO IT!!!!!!!!!!!!!!!!!

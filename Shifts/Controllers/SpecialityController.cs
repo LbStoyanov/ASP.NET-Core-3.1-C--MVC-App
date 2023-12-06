@@ -53,6 +53,7 @@ namespace Shifts.Controllers
             return View(speciality);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -67,18 +68,33 @@ namespace Shifts.Controllers
                 return NotFound();
             }
 
+            bool isSpecialityUsed = await _context.DoctorSpecialities.AnyAsync(ds => ds.SpecialityId == id);
+
+            if (isSpecialityUsed)
+            {
+                ViewBag.WarningMessage = "Warning: There are doctors assigned to this speciality. Deleting this speciality may affect related data.";
+            }
+
 
             return View(speciality);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var speciality = await this._context.Specialities.FindAsync(id);
+            var speciality = await _context.Specialities.FindAsync(id);
 
-            this._context.Specialities.Remove(speciality!);
-            await this._context.SaveChangesAsync();
+            // Check if the speciality is in use
+            var isSpecialityUsed = await _context.DoctorSpecialities.AnyAsync(ds => ds.SpecialityId == id);
+            if (isSpecialityUsed)
+            {
+                // Handle the case where speciality is in use (e.g., display an error message)
+                return View(speciality);
+            }
 
+            _context.Specialities.Remove(speciality!);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
