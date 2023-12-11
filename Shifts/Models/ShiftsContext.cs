@@ -10,24 +10,24 @@ namespace Shifts.Models
 
         }
 
-        public DbSet<Speciality> Specialities { get; set; } = null!;
+        public DbSet<Specialty> Specialties { get; set; } = null!;
 
         public DbSet<Patient> Patients { get; set; } = null!;
 
         public DbSet<Doctor> Doctors { get; set; } = null!;
 
-        public DbSet<DoctorSpecialities> DoctorSpecialities { get; set; } = null!;
+        public DbSet<DoctorSpecialties> DoctorSpecialties { get; set; } = null!;
         public DbSet<Shift> Shifts { get; set; } = null!;
 
         public DbSet<Login> Logins { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Speciality>(entity =>
+            modelBuilder.Entity<Specialty>(entity =>
             {
-                entity.ToTable("Specialities");
+                entity.ToTable("Specialties");
 
-                entity.HasKey(e => e.SpecialityId);
+                entity.HasKey(e => e.SpecialtyId);
 
                 entity.Property(e => e.Description)
                 .IsRequired()
@@ -108,15 +108,15 @@ namespace Shifts.Models
                 .IsUnicode(false);
             });
 
-            modelBuilder.Entity<DoctorSpecialities>().HasKey(x => new { x.DoctorId, x.SpecialityId });
+            modelBuilder.Entity<DoctorSpecialties>().HasKey(x => new { x.DoctorId, x.SpecialtyId });
 
-            modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Doctor)
-            .WithMany(p => p.DoctorSpecialities)
+            modelBuilder.Entity<DoctorSpecialties>().HasOne(x => x.Doctor)
+            .WithMany(p => p.DoctorSpecialties)
             .HasForeignKey(p => p.DoctorId);
 
-            modelBuilder.Entity<DoctorSpecialities>().HasOne(x => x.Speciality)
-            .WithMany(p => p.DoctorSpecialities)
-            .HasForeignKey(p => p.SpecialityId);
+            modelBuilder.Entity<DoctorSpecialties>().HasOne(x => x.Specialty)
+            .WithMany(p => p.DoctorSpecialties)
+            .HasForeignKey(p => p.SpecialtyId);
 
             modelBuilder.Entity<Shift>(entity =>
             {

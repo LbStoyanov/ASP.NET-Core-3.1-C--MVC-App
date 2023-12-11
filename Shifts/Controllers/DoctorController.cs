@@ -43,33 +43,54 @@ namespace Shifts.Controllers
         // GET: Doctor/Create
         public IActionResult Create()
         {
-            ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+            var specialties = this._context.Specialities.ToList();
+
+            if (!specialties.Any())
+            {
+                ViewBag.NoSpecialties = true;
+            }
+            else
+            {
+                ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+            }
+
             return View();
         }
 
         // POST: Doctor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DoctorId,FirstName,LastName,Address,PhoneNumber,Email,WorkingHoursFrom,WorkingHoursTo")] Doctor doctor, int SpecialityId)
+        public async Task<IActionResult> Create([Bind("DoctorId,FirstName,LastName,Address,PhoneNumber,Email,WorkingHoursFrom,WorkingHoursTo")] Doctor doctor, int? SpecialityId)
         {
             if (ModelState.IsValid)
             {
                 this._context.Doctors.Add(doctor);
                 await this._context.SaveChangesAsync();
                 //IF SPECIALTY ID IS NULL FIRST MUST BE CREATED A SPECIALITY FOR THIS DOCTOR!!!
-                
-
-                var doctorSpeciality = new DoctorSpecialities
+                if (SpecialityId.HasValue)
                 {
-                    DoctorId = doctor.DoctorId,
-                    SpecialityId = SpecialityId
-                };
-                this._context.DoctorSpecialities.Add(doctorSpeciality);
+                    var doctorSpeciality = new DoctorSpecialities
+                    {
+                        DoctorId = doctor.DoctorId,
+                        SpecialityId = SpecialityId.Value
+                    };
+                    this._context.DoctorSpecialities.Add(doctorSpeciality);
 
-                await this._context.SaveChangesAsync();
+                    await this._context.SaveChangesAsync();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Specialty is required.");
+                    ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+                    return View(doctor);
+                }
+
+
+
 
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
             return View(doctor);
         }
 
@@ -172,11 +193,14 @@ namespace Shifts.Controllers
             var doctorSpeciality = await this._context.DoctorSpecialities
             .FirstOrDefaultAsync(ds => ds.DoctorId == id);
 
-            this._context.DoctorSpecialities.Remove(doctorSpeciality!);
-            await _context.SaveChangesAsync();
+            if (doctorSpeciality != null)
+            {
+                this._context.DoctorSpecialities.Remove(doctorSpeciality);
+                await _context.SaveChangesAsync();
+            }
 
             var doctor = await _context.Doctors.FindAsync(id);
-            _context.Doctors.Remove(doctor!);
+            this._context.Doctors.Remove(doctor!);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

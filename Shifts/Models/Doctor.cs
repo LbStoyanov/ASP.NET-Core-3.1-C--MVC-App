@@ -6,7 +6,7 @@ namespace Shifts.Models
     {
         public Doctor()
         {
-            this.DoctorSpecialities = new List<DoctorSpecialities>();
+            this.DoctorSpecialties = new List<DoctorSpecialties>();
             this.Shifts = new List<Shift>();
         }
 
@@ -43,7 +43,7 @@ namespace Shifts.Models
         [DisplayFormat(DataFormatString = "{0:t}", ApplyFormatInEditMode = true)]
         public DateTime WorkingHoursTo { get; set; }
 
-        public List<DoctorSpecialities> DoctorSpecialities { get; set; }
+        public List<DoctorSpecialties> DoctorSpecialties { get; set; }
 
         public List<Shift> Shifts { get; set; }
     }

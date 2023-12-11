@@ -16,78 +16,86 @@
     <hr />
     <div class="row">
         <div>
-            <form class="col s12" asp-action="Create">
-                <div asp-validation-summary="ModelOnly"></div>
+            @if (ViewBag.NoSpecialties == true)
+            {
+                <p>No specialties available. Please <a href="@Url.Action("Create", "Specialty")">create a specialty</a>
+                    first.</p>
+            }
+            else
+            {
+                <form class="col s12" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly"></div>
 
-                <div class="row">
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input asp-for="FirstName" type="text" class="validate">
-                        <label asp-for="FirstName"></label>
-                        <span asp-validation-for="FirstName"></span>
-                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input asp-for="FirstName" type="text" class="validate">
+                            <label asp-for="FirstName"></label>
+                            <span asp-validation-for="FirstName"></span>
+                        </div>
 
-                    <div class="input-field col s6">
-                        <input asp-for="LastName" type="text" class="validate">
-                        <label asp-for="LastName"></label>
-                        <span asp-validation-for="LastName"></span>
+                        <div class="input-field col s6">
+                            <input asp-for="LastName" type="text" class="validate">
+                            <label asp-for="LastName"></label>
+                            <span asp-validation-for="LastName"></span>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">markunread_mailbox</i>
+                            <input asp-for="Address" type="text" class="validate">
+                            <label asp-for="Address"></label>
+                            <span asp-validation-for="Address"></span>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input asp-for="PhoneNumber" type="tel" class="validate">
+                            <label asp-for="PhoneNumber">Telephone</label>
+                            <span asp-validation-for="PhoneNumber"></span>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">local_post_office</i>
+                            <input asp-for="Email" type="tel" class="validate" />
+                            <label asp-for="Email"></label>
+                            <span asp-validation-for="Email"></span>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">event_note</i>
+                            <label asp-for="WorkingHoursFrom"></label>
+                            <input asp-for="WorkingHoursFrom" type="text" class="timepicker" />
+                            <span asp-validation-for="WorkingHoursFrom"></span>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">event_note</i>
+                            <label asp-for="WorkingHoursTo"></label>
+                            <input input asp-for="WorkingHoursTo" type="text" class="timepicker" />
+                            <span asp-validation-for="WorkingHoursTo"></span>
+                        </div>
                     </div>
 
                     <div class="input-field col s12">
-                        <i class="material-icons prefix">markunread_mailbox</i>
-                        <input asp-for="Address" type="text" class="validate">
-                        <label asp-for="Address"></label>
-                        <span asp-validation-for="Address"></span>
+                        <i class="material-icons prefix">star_rate</i>
+                        <select name="SpecialtyId" class="form-select" asp-items=ViewBag.SpecialtiesList></select>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col s6 s6">
+                            <button class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">Save
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+
+                        <div class="col s6 s6">
+                            <a class="waves-effect waves-light btn grey darken-4" asp-action="Index"><i
+                                    class="material-icons left">undo</i>Back</a>
+                        </div>
                     </div>
 
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">phone</i>
-                        <input asp-for="PhoneNumber" type="tel" class="validate">
-                        <label asp-for="PhoneNumber">Telephone</label>
-                        <span asp-validation-for="PhoneNumber"></span>
-                    </div>
-
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">local_post_office</i>
-                        <input asp-for="Email" type="tel" class="validate" />
-                        <label asp-for="Email"></label>
-                        <span asp-validation-for="Email"></span>
-                    </div>
-
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">event_note</i>
-                        <label asp-for="WorkingHoursFrom"></label>
-                        <input asp-for="WorkingHoursFrom" type="text" class="timepicker" />
-                        <span asp-validation-for="WorkingHoursFrom"></span>
-                    </div>
-
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">event_note</i>
-                        <label asp-for="WorkingHoursTo"></label>
-                        <input input asp-for="WorkingHoursTo" type="text" class="timepicker" />
-                        <span asp-validation-for="WorkingHoursTo"></span>
-                    </div>
-                </div>
-
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">star_rate</i>
-                    <select name="SpecialityId" class="form-select" asp-items=ViewBag.SpecialitiesList></select>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col s6 s6">
-                        <button class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">Save
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
-
-                    <div class="col s6 s6">
-                        <a class="waves-effect waves-light btn grey darken-4" asp-action="Index"><i
-                                class="material-icons left">undo</i>Back</a>
-                    </div>
-                </div>
-
-            </form>
+                </form>
+            }
         </div>
     </div>
 </body>
