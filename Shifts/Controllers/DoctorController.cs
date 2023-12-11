@@ -54,7 +54,7 @@ namespace Shifts.Controllers
         {
             if (ModelState.IsValid)
             {
-                this._context.Add(doctor);
+                this._context.Doctors.Add(doctor);
                 await this._context.SaveChangesAsync();
                 //IF SPECIALTY ID IS NULL FIRST MUST BE CREATED A SPECIALITY FOR THIS DOCTOR!!!
                 
@@ -64,7 +64,7 @@ namespace Shifts.Controllers
                     DoctorId = doctor.DoctorId,
                     SpecialityId = SpecialityId
                 };
-                this._context.Add(doctorSpeciality);
+                this._context.DoctorSpecialities.Add(doctorSpeciality);
 
                 await this._context.SaveChangesAsync();
 

@@ -12,17 +12,17 @@ namespace Shifts.Controllers
 
         public ShiftController(ShiftsContext context, IConfiguration configuration)
         {
-            _context = context;
-            _configuration = configuration;
+            this._context = context;
+            this._configuration = configuration;
         }
 
         public IActionResult Index()
         {
             ViewData["DoctorId"] =
-            new SelectList(from doctor in _context.Doctors.ToList() select new { doctor.DoctorId, FullName = doctor.FirstName + " " + doctor.LastName }, "DoctorId", "FullName");
+            new SelectList(from doctor in this._context.Doctors.ToList() select new { doctor.DoctorId, FullName = doctor.FirstName + " " + doctor.LastName }, "DoctorId", "FullName");
 
             ViewData["PatientId"] =
-            new SelectList(from patient in _context.Patients.ToList() select new { patient.PatientId, FullName = patient.FirstName + " " + patient.LastName }, "PatientId", "FullName");
+            new SelectList(from patient in this._context.Patients.ToList() select new { patient.PatientId, FullName = patient.FirstName + " " + patient.LastName }, "PatientId", "FullName");
 
             return View();
         }
@@ -30,7 +30,7 @@ namespace Shifts.Controllers
         public JsonResult GetShifts(int doctorId)
         {
 
-            var shifts = _context.Shifts.Where(sh => sh.DoctorId == doctorId)
+            var shifts = this._context.Shifts.Where(sh => sh.DoctorId == doctorId)
             .Select(sh => new
             {
                 sh.ShiftId,
@@ -52,8 +52,8 @@ namespace Shifts.Controllers
 
             try
             {
-                _context.Shifts.Add(shift);
-                _context.SaveChangesAsync();
+                this._context.Shifts.Add(shift);
+                this._context.SaveChangesAsync();
                 ok = true;
             }
             catch (Exception ex)
@@ -73,11 +73,11 @@ namespace Shifts.Controllers
 
             try
             {
-                var shiftForDelete = _context.Shifts.Where(t => t.ShiftId == shiftId).FirstOrDefault();
+                var shiftForDelete = this._context.Shifts.Where(t => t.ShiftId == shiftId).FirstOrDefault();
                 if (shiftForDelete != null)
                 {
-                    _context.Shifts.Remove(shiftForDelete);
-                    _context.SaveChangesAsync();
+                    this._context.Shifts.Remove(shiftForDelete);
+                    this._context.SaveChangesAsync();
                     ok = true;
                 }
 
