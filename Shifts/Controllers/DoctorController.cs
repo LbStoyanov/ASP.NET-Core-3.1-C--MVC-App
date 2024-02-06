@@ -29,8 +29,8 @@ namespace Shifts.Controllers
             }
 
             var doctor = await this._context.Doctors
-                .Where(m => m.DoctorId == id).Include(ds => ds.DoctorSpecialities)
-                .ThenInclude(s => s.Speciality).FirstOrDefaultAsync();
+                .Where(m => m.DoctorId == id).Include(ds => ds.DoctorSpecialties)
+                .ThenInclude(s => s.Specialty).FirstOrDefaultAsync();
 
             if (doctor == null)
             {
@@ -43,7 +43,7 @@ namespace Shifts.Controllers
         // GET: Doctor/Create
         public IActionResult Create()
         {
-            var specialties = this._context.Specialities.ToList();
+            var specialties = this._context.Specialties.ToList();
 
             if (!specialties.Any())
             {
@@ -51,7 +51,7 @@ namespace Shifts.Controllers
             }
             else
             {
-                ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+                ViewData["SpecialtiesList"] = new SelectList(this._context.Specialties, "SpecialtyId", "Description");
             }
 
             return View();
@@ -60,28 +60,28 @@ namespace Shifts.Controllers
         // POST: Doctor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DoctorId,FirstName,LastName,Address,PhoneNumber,Email,WorkingHoursFrom,WorkingHoursTo")] Doctor doctor, int? SpecialityId)
+        public async Task<IActionResult> Create([Bind("DoctorId,FirstName,LastName,Address,PhoneNumber,Email,WorkingHoursFrom,WorkingHoursTo")] Doctor doctor, int? SpecialtyId)
         {
             if (ModelState.IsValid)
             {
                 this._context.Doctors.Add(doctor);
                 await this._context.SaveChangesAsync();
                 //IF SPECIALTY ID IS NULL FIRST MUST BE CREATED A SPECIALITY FOR THIS DOCTOR!!!
-                if (SpecialityId.HasValue)
+                if (SpecialtyId.HasValue)
                 {
-                    var doctorSpeciality = new DoctorSpecialities
+                    var doctorSpeciality = new DoctorSpecialties
                     {
                         DoctorId = doctor.DoctorId,
-                        SpecialityId = SpecialityId.Value
+                        SpecialtyId = SpecialtyId.Value
                     };
-                    this._context.DoctorSpecialities.Add(doctorSpeciality);
+                    this._context.DoctorSpecialties.Add(doctorSpeciality);
 
                     await this._context.SaveChangesAsync();
                 }
                 else
                 {
                     ModelState.AddModelError("", "Specialty is required.");
-                    ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+                    ViewData["SpecialitiesList"] = new SelectList(this._context.Specialties, "SpecialtyId", "Description");
                     return View(doctor);
                 }
 
@@ -90,7 +90,7 @@ namespace Shifts.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SpecialitiesList"] = new SelectList(this._context.Specialities, "SpecialityId", "Description");
+            ViewData["SpecialitiesList"] = new SelectList(this._context.Specialties, "SpecialtyId", "Description");
             return View(doctor);
         }
 
@@ -105,7 +105,7 @@ namespace Shifts.Controllers
 
             //Inner Join applied
             var doctor = await this._context.Doctors.Where(d => d.DoctorId == id)
-            .Include(ds => ds.DoctorSpecialities).FirstOrDefaultAsync();
+            .Include(ds => ds.DoctorSpecialties).FirstOrDefaultAsync();
 
             if (doctor == null)
             {
@@ -113,7 +113,7 @@ namespace Shifts.Controllers
             }
 
             ViewData["SpecialitiesList"] = new SelectList(
-                this._context.Specialities, "SpecialityId", "Description", doctor.DoctorSpecialities[0].SpecialityId
+                this._context.Specialties, "SpecialityId", "Description", doctor.DoctorSpecialties[0].SpecialtyId
             );
 
             return View(doctor);
@@ -138,13 +138,13 @@ namespace Shifts.Controllers
                     _context.Update(doctor);
                     await this._context.SaveChangesAsync();
 
-                    var doctorSpeciality = await this._context.DoctorSpecialities
+                    var doctorSpeciality = await this._context.DoctorSpecialties
                     .FirstOrDefaultAsync(ds => ds.DoctorId == id);
 
                     this._context.Remove(doctorSpeciality!);
                     await this._context.SaveChangesAsync();
 
-                    doctorSpeciality!.SpecialityId = SpecialityId;
+                    doctorSpeciality!.SpecialtyId = SpecialityId;
 
                     this._context.Add(doctorSpeciality);
 
@@ -190,12 +190,12 @@ namespace Shifts.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var doctorSpeciality = await this._context.DoctorSpecialities
+            var doctorSpeciality = await this._context.DoctorSpecialties
             .FirstOrDefaultAsync(ds => ds.DoctorId == id);
 
             if (doctorSpeciality != null)
             {
-                this._context.DoctorSpecialities.Remove(doctorSpeciality);
+                this._context.DoctorSpecialties.Remove(doctorSpeciality);
                 await _context.SaveChangesAsync();
             }
 

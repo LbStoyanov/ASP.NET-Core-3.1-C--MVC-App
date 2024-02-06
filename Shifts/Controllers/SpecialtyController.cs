@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shifts.Models;
 
+
 namespace Shifts.Controllers
 {
-    public class SpecialityController : Controller
+    public class SpecialtyController : Controller
     {
         private readonly ShiftsContext _context;
-        public SpecialityController(ShiftsContext context)
+        public SpecialtyController(ShiftsContext context)
         {
 
             this._context = context;
@@ -15,7 +16,7 @@ namespace Shifts.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await this._context.Specialities.ToListAsync());
+            return View(await this._context.Specialties.ToListAsync());
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -26,31 +27,31 @@ namespace Shifts.Controllers
                 return NotFound();
             }
 
-            var speciality = await this._context.Specialities.FindAsync(id);
+            var specialty = await this._context.Specialties.FindAsync(id);
 
-            if (speciality == null)
+            if (specialty == null)
             {
                 return NotFound();
             }
 
-            return View(speciality);
+            return View(specialty);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("SpecialityId,Description")] Speciality speciality)
+        public async Task<IActionResult> Edit(int id, [Bind("SpecialtyId,Description")] Specialty specialty)
         {
-            if (id != speciality.SpecialityId)
+            if (id != specialty.SpecialtyId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                this._context.Update(speciality);
+                this._context.Update(specialty);
                 await this._context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(speciality);
+            return View(specialty);
         }
 
         [HttpGet]
@@ -61,39 +62,39 @@ namespace Shifts.Controllers
                 return NotFound();
             }
 
-            var speciality = await this._context.Specialities.FirstOrDefaultAsync(x => x.SpecialityId == id);
+            var specialty = await this._context.Specialties.FirstOrDefaultAsync(x => x.SpecialtyId == id);
 
-            if (speciality == null)
+            if (specialty == null)
             {
                 return NotFound();
             }
 
-            bool isSpecialityUsed = await _context.DoctorSpecialities.AnyAsync(ds => ds.SpecialityId == id);
+            bool isSpecialtyUsed = await _context.DoctorSpecialties.AnyAsync(ds => ds.SpecialtyId == id);
 
-            if (isSpecialityUsed)
+            if (isSpecialtyUsed)
             {
-                ViewBag.WarningMessage = "Warning: There are doctors assigned to this speciality. Deleting this speciality may affect related data.";
+                ViewBag.WarningMessage = "Warning: There are doctors assigned to this speciality. Deleting this specialty may affect related data.";
             }
 
 
-            return View(speciality);
+            return View(specialty);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var speciality = await _context.Specialities.FindAsync(id);
+            var specialty = await _context.Specialties.FindAsync(id);
 
-            // Check if the speciality is in use
-            var isSpecialityUsed = await _context.DoctorSpecialities.AnyAsync(ds => ds.SpecialityId == id);
+            // Check if the specialty is in use
+            var isSpecialityUsed = await _context.DoctorSpecialties.AnyAsync(ds => ds.SpecialtyId == id);
             if (isSpecialityUsed)
             {
-                // Handle the case where speciality is in use (e.g., display an error message)
-                return View(speciality);
+                // Handle the case where specialty is in use (e.g., display an error message)
+                return View(specialty);
             }
 
-            _context.Specialities.Remove(speciality!);
+            _context.Specialties.Remove(specialty!);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -104,16 +105,16 @@ namespace Shifts.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("SpecialityId,Description")] Speciality speciality)
+        public async Task<IActionResult> Create([Bind("SpecialtyId,Description")] Specialty specialty)
         {
             if (ModelState.IsValid)
             {
-                this._context.Add(speciality);
+                this._context.Add(specialty);
                 await this._context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(speciality);
+            return View(specialty);
         }
 
 

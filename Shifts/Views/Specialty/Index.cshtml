@@ -1,11 +1,11 @@
-@model IEnumerable<Shifts.Models.Speciality>
+@model IEnumerable<Shifts.Models.Specialty>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Specialities</title>
+    <title>Specialties</title>
 </head>
 
 <body>
@@ -31,8 +31,8 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td style="text-align: right;">
-                        <a asp-action="Edit" asp-route-id="@item.SpecialityId"><i class="material-icons">edit</i></a> |
-                        <a asp-action="Delete" asp-route-id="@item.SpecialityId"><i
+                        <a asp-action="Edit" asp-route-id="@item.SpecialtyId"><i class="material-icons">edit</i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.SpecialtyId"><i
                                 class="material-icons red-text">delete_forever</i></a>
                     </td>
                 </tr>
